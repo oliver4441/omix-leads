@@ -1,0 +1,10 @@
+services:
+  - type: static_site
+    name: omix-leads
+    buildCommand: npm install && npm run build
+    publishPath: dist
+    envVars:
+      - key: VITE_SUPABASE_URL
+        value: https://xmdyovfcjogkarwxiyhb.supabase.co
+      - key: VITE_OMIX_STORE_URL
+        value: https://stor1-web.onrender.com

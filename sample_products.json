@@ -1,0 +1,57 @@
+[
+  {
+    "name": "MEN'S CASUAL SHOES",
+    "sku": "101073",
+    "description": "These casual suede shoes feature trim detailing and a flexible sole. The ideal way to complete both smart and casual looks.Available in number 44 and 45.",
+    "brand": "Kilimall",
+    "price": 0.0,
+    "currency": "KES",
+    "availability": "http://schema.org/OutOfStock",
+    "category": "",
+    "url": "https://www.kilimall.co.ke/listing/101073"
+  },
+  {
+    "name": "MEN'S LOAFERS SHOES.",
+    "sku": "101075",
+    "description": "Colour:Black These black loafer suede shoes bridging the gap between smart and casual perfectly.Available in number 44 and 45.",
+    "brand": "Kilimall",
+    "price": 0.0,
+    "currency": "KES",
+    "availability": "http://schema.org/OutOfStock",
+    "category": "",
+    "url": "https://www.kilimall.co.ke/listing/101075"
+  },
+  {
+    "name": "MEN'S CASUAL SHOES",
+    "sku": "101076",
+    "description": "These are suede shoes detailing bridging the gap between smart and casual perfectly.",
+    "brand": "Kilimall",
+    "price": 0.0,
+    "currency": "KES",
+    "availability": "http://schema.org/OutOfStock",
+    "category": "",
+    "url": "https://www.kilimall.co.ke/listing/101076"
+  },
+  {
+    "name": "Men's Slippers",
+    "sku": "101291",
+    "description": "Sponge slippers shoes Flip-flops men Leisure is cool procrastinate sandals",
+    "brand": "Kilimall",
+    "price": 0.0,
+    "currency": "KES",
+    "availability": "http://schema.org/OutOfStock",
+    "category": "",
+    "url": "https://www.kilimall.co.ke/listing/101291"
+  },
+  {
+    "name": "Men's Slippers",
+    "sku": "101293",
+    "description": "Men's Slippers",
+    "brand": "Kilimall",
+    "price": 0.0,
+    "currency": "KES",
+    "availability": "http://schema.org/OutOfStock",
+    "category": "",
+    "url": "https://www.kilimall.co.ke/listing/101293"
+  }
+]
