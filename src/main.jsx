@@ -1,19 +1,13 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
 
-// Catch render errors silently
-try {
-  createRoot(document.getElementById('root')).render(
-    <StrictMode>
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <BrowserRouter>
       <App />
-    </StrictMode>,
-  )
-} catch (e) {
-  document.getElementById('root').innerHTML =
-    '<pre style="color:red;padding:20px;font-size:14px">' +
-    (e?.stack || e?.message || String(e) || 'Unknown error') +
-    '</pre>'
-  console.error('Render error:', e)
-}
+    </BrowserRouter>
+  </StrictMode>,
+)
