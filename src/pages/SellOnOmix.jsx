@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { Store, TrendingUp, ShieldCheck, CheckCircle, Loader2 } from 'lucide-react';
+import { Store, TrendingUp, ShieldCheck, CheckCircle, Loader2, ArrowRight } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { KENYAN_COUNTIES, BUSINESS_INDUSTRIES } from '../lib/constants';
 
 const benefits = [
-  { icon: Store, title: 'Easy Setup', desc: 'List your first product in minutes — no tech skills needed.' },
-  { icon: TrendingUp, title: 'Grow Sales', desc: 'Reach thousands of buyers across all 47 counties.' },
-  { icon: ShieldCheck, title: 'Secure Payments', desc: 'M-Pesa & card payments handled securely for you.' },
+  { icon: Store, title: 'Easy Setup', desc: 'List your first product in minutes — no tech skills needed.', gradient: 'from-orange-500 to-amber-500' },
+  { icon: TrendingUp, title: 'Grow Sales', desc: 'Reach thousands of buyers across all 47 counties.', gradient: 'from-green-500 to-emerald-500' },
+  { icon: ShieldCheck, title: 'Secure Payments', desc: 'M-Pesa & card payments handled securely for you.', gradient: 'from-blue-500 to-indigo-500' },
 ];
 
 const initialForm = {
@@ -70,84 +70,94 @@ export default function SellOnOmix() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-16">
+    <div className="min-h-screen bg-warm py-16 md:py-20 animate-fade-in">
       <div className="max-w-4xl mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-10">
-          <div className="w-14 h-14 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center mx-auto mb-4">
-            <Store size={28} />
+        <div className="text-center mb-12">
+          <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 text-white flex items-center justify-center mx-auto mb-4 shadow-sm animate-scale-in">
+            <Store size={26} />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Sell on Omix</h1>
-          <p className="text-gray-500">Join hundreds of Kenyan businesses selling on the Omix marketplace.</p>
+          <h1 className="text-3xl md:text-4xl font-bold text-zinc-900 mb-2">Sell on Omix</h1>
+          <p className="text-zinc-500 max-w-md mx-auto">Join hundreds of Kenyan businesses selling on the Omix marketplace.</p>
         </div>
 
         {/* Benefits */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12">
           {benefits.map((b) => (
-            <div key={b.title} className="bg-white rounded-xl p-5 text-center shadow-sm border border-gray-100">
-              <b.icon className="text-[#ff385c] mx-auto mb-3" size={28} />
-              <h3 className="font-semibold text-gray-900 mb-1">{b.title}</h3>
-              <p className="text-sm text-gray-500">{b.desc}</p>
+            <div key={b.title} className="bg-white rounded-xl p-6 text-center border border-zinc-100 card-hover">
+              <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${b.gradient} flex items-center justify-center mx-auto mb-3 shadow-sm`}>
+                <b.icon className="text-white" size={22} />
+              </div>
+              <h3 className="font-semibold text-zinc-900 mb-1">{b.title}</h3>
+              <p className="text-sm text-zinc-500 leading-relaxed">{b.desc}</p>
             </div>
           ))}
         </div>
 
         {success ? (
-          <div className="bg-white rounded-2xl shadow-lg p-8 text-center">
-            <CheckCircle className="text-green-500 mx-auto mb-4" size={48} />
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Application Submitted! 🎉</h2>
-            <p className="text-gray-500 mb-2">We'll review your application and get back to you within 48 hours.</p>
-            <p className="text-sm text-gray-400">Check your email for a confirmation.</p>
+          <div className="bg-white rounded-2xl shadow-lg border border-zinc-100 p-8 md:p-10 text-center max-w-lg mx-auto animate-scale-in">
+            <div className="w-16 h-16 rounded-full bg-green-50 text-green-500 flex items-center justify-center mx-auto mb-4">
+              <CheckCircle size={36} />
+            </div>
+            <h2 className="text-2xl font-bold text-zinc-900 mb-2">Application Submitted!</h2>
+            <p className="text-zinc-500 mb-2">We'll review your application and get back to you within 48 hours.</p>
+            <p className="text-sm text-zinc-400">Check your email for a confirmation.</p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-sm p-6 space-y-4 border border-gray-100 max-w-lg mx-auto">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Business Name *</label>
-              <input name="business_name" required value={form.business_name} onChange={handleChange}
-                className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#ff385c] outline-none" />
+          <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-sm border border-zinc-100 p-6 md:p-8 space-y-5 max-w-lg mx-auto card-hover">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-zinc-700 mb-1.5">Business Name *</label>
+                <input name="business_name" required value={form.business_name} onChange={handleChange}
+                  className="w-full border border-zinc-200 rounded-xl px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-brand/30 focus:border-brand outline-none transition-all" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-zinc-700 mb-1.5">Owner Name *</label>
+                <input name="owner_name" required value={form.owner_name} onChange={handleChange}
+                  className="w-full border border-zinc-200 rounded-xl px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-brand/30 focus:border-brand outline-none transition-all" />
+              </div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-zinc-700 mb-1.5">Phone *</label>
+                <input name="phone" type="tel" required value={form.phone} onChange={handleChange}
+                  className="w-full border border-zinc-200 rounded-xl px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-brand/30 focus:border-brand outline-none transition-all" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-zinc-700 mb-1.5">Email *</label>
+                <input name="email" type="email" required value={form.email} onChange={handleChange}
+                  className="w-full border border-zinc-200 rounded-xl px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-brand/30 focus:border-brand outline-none transition-all" />
+              </div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-zinc-700 mb-1.5">County *</label>
+                <select name="county" required value={form.county} onChange={handleChange}
+                  className="w-full border border-zinc-200 rounded-xl px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-brand/30 focus:border-brand outline-none transition-all bg-white">
+                  <option value="">Select county</option>
+                  {KENYAN_COUNTIES.map((c) => <option key={c} value={c}>{c}</option>)}
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-zinc-700 mb-1.5">Industry *</label>
+                <select name="industry" required value={form.industry} onChange={handleChange}
+                  className="w-full border border-zinc-200 rounded-xl px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-brand/30 focus:border-brand outline-none transition-all bg-white">
+                  <option value="">Select industry</option>
+                  {BUSINESS_INDUSTRIES.map((i) => <option key={i} value={i}>{i}</option>)}
+                </select>
+              </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Owner Name *</label>
-              <input name="owner_name" required value={form.owner_name} onChange={handleChange}
-                className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#ff385c] outline-none" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Phone *</label>
-              <input name="phone" type="tel" required value={form.phone} onChange={handleChange}
-                className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#ff385c] outline-none" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Email *</label>
-              <input name="email" type="email" required value={form.email} onChange={handleChange}
-                className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#ff385c] outline-none" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">County *</label>
-              <select name="county" required value={form.county} onChange={handleChange}
-                className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#ff385c] outline-none bg-white">
-                <option value="">Select county</option>
-                {KENYAN_COUNTIES.map((c) => <option key={c} value={c}>{c}</option>)}
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Industry *</label>
-              <select name="industry" required value={form.industry} onChange={handleChange}
-                className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#ff385c] outline-none bg-white">
-                <option value="">Select industry</option>
-                {BUSINESS_INDUSTRIES.map((i) => <option key={i} value={i}>{i}</option>)}
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Products Description *</label>
+              <label className="block text-sm font-medium text-zinc-700 mb-1.5">Products Description *</label>
               <textarea name="products_description" required rows={3} value={form.products_description} onChange={handleChange}
                 placeholder="Briefly describe what you'd like to sell..."
-                className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#ff385c] outline-none resize-none" />
+                className="w-full border border-zinc-200 rounded-xl px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-brand/30 focus:border-brand outline-none transition-all resize-none" />
             </div>
 
-            {error && <p className="text-red-500 text-sm">{error}</p>}
+            {error && <p className="text-red-500 text-sm bg-red-50 p-3 rounded-xl">{error}</p>}
 
             <button type="submit" disabled={loading}
-              className="w-full bg-[#ff385c] text-white font-semibold py-3 rounded-lg hover:bg-red-600 transition-colors disabled:opacity-50 flex items-center justify-center gap-2">
+              className="w-full bg-gradient-to-r from-orange-500 to-brand text-white font-semibold py-3 rounded-xl hover:from-brand hover:to-brand-dark active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center gap-2 shadow-sm hover:shadow-md">
               {loading ? <><Loader2 size={18} className="animate-spin" /> Applying...</> : 'Apply to Sell'}
             </button>
           </form>
