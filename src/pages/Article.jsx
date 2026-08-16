@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { ArrowLeft, ArrowRight, BookOpen } from 'lucide-react'
 import { articles } from '../data/articles'
@@ -5,9 +6,29 @@ import { articles } from '../data/articles'
 export default function Article() {
   const { slug } = useParams()
   const article = articles.find(a => a.slug === slug)
+
+  useEffect(() => {
+    if (!article) return
+    document.title = `${article.title} — OMIX Journal`
+    const description = document.querySelector('meta[name="description"]')
+    if (description) description.setAttribute('content', article.excerpt)
+  }, [article])
+
   if (!article) return <div className="max-w-3xl mx-auto px-5 py-24"><h1 className="text-3xl font-serif">Article not found</h1><Link className="inline-flex mt-5 text-sm font-semibold" to="/wiki">← Back to the knowledge base</Link></div>
 
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: article.title,
+    description: article.excerpt,
+    datePublished: article.date,
+    author: { '@type': 'Organization', name: 'OMIX Systems', url: 'https://omixsystems.store/' },
+    publisher: { '@type': 'Organization', name: 'OMIX Systems', url: 'https://omixsystems.store/' },
+    mainEntityOfPage: `https://blog.omixsystems.store/wiki/${article.slug}`,
+  }
+
   return <article className="bg-white min-h-screen">
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
     <div className="max-w-3xl mx-auto px-5 py-12 md:py-20">
       <Link to="/wiki" className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-slate-900"><ArrowLeft size={15} /> Knowledge Base</Link>
       <div className="mt-10 flex items-center gap-3 text-sm text-slate-500"><span className="font-semibold text-slate-800">{article.category}</span><span>•</span><span>{article.date}</span><span>•</span><span>{article.readTime}</span></div>
