@@ -25,12 +25,12 @@ export default function Article() {
 
   if (!article) {
     return (
-      <div className="bg-[#f8fafc] min-h-screen">
+      <div className="bg-slate-50 dark:bg-slate-950 min-h-screen font-sans">
         <div className="max-w-[1500px] mx-auto px-4 sm:px-6 py-12 flex gap-8">
           <DocsSidebar />
-          <div className="flex-1 bg-white border border-slate-200 rounded-xl p-8 text-center">
-            <h1 className="text-2xl font-serif font-bold text-slate-900">Article or Documentation Not Found</h1>
-            <p className="mt-2 text-slate-600 text-sm">The documentation page you are looking for does not exist or has been moved.</p>
+          <div className="flex-1 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-8 text-center">
+            <h1 className="text-2xl font-serif font-bold text-slate-900 dark:text-white">Article or Documentation Not Found</h1>
+            <p className="mt-2 text-slate-600 dark:text-slate-400 text-sm">The documentation page you are looking for does not exist or has been moved.</p>
             <Link className="inline-flex items-center gap-1.5 mt-5 text-xs font-bold bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-500" to="/wiki">
               ← Return to Documentation Index
             </Link>
@@ -57,27 +57,27 @@ export default function Article() {
   }
 
   return (
-    <div className="bg-[#f8fafc] min-h-screen text-slate-800 font-sans">
+    <div className="bg-slate-50 dark:bg-slate-950 min-h-screen text-slate-800 dark:text-slate-200 font-sans transition-colors">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
 
       {/* Breadcrumb Top Bar */}
-      <div className="border-b border-slate-200 bg-white">
+      <div className="border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60">
         <div className="max-w-[1500px] mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2 text-xs text-slate-500 font-mono overflow-x-auto">
-            <Link to="/wiki" className="hover:text-slate-900 flex items-center gap-1 flex-shrink-0">
-              <BookOpen size={14} className="text-emerald-600" /> OMIX Docs
+          <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 font-mono overflow-x-auto">
+            <Link to="/wiki" className="hover:text-slate-900 dark:hover:text-white flex items-center gap-1 flex-shrink-0">
+              <BookOpen size={14} className="text-emerald-600 dark:text-emerald-400" /> OMIX Docs
             </Link>
             <ChevronRight size={12} />
-            <span className="text-slate-600 font-medium flex-shrink-0">{article.category}</span>
+            <span className="text-slate-600 dark:text-slate-300 font-medium flex-shrink-0">{article.category}</span>
             <ChevronRight size={12} />
-            <span className="text-slate-900 font-semibold truncate max-w-xs">{article.title}</span>
+            <span className="text-slate-900 dark:text-white font-semibold truncate max-w-xs">{article.title}</span>
           </div>
 
           <button
             onClick={copyPageUrl}
-            className="hidden sm:flex items-center gap-1.5 text-xs font-mono text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 px-3 py-1 rounded border border-slate-200 transition-colors"
+            className="hidden sm:flex items-center gap-1.5 text-xs font-mono text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-3 py-1 rounded border border-slate-200 dark:border-slate-700 transition-colors"
           >
-            {copied ? <Check size={13} className="text-emerald-600" /> : <Copy size={13} />}
+            {copied ? <Check size={13} className="text-emerald-600 dark:text-emerald-400" /> : <Copy size={13} />}
             <span>{copied ? 'Copied link' : 'Copy link'}</span>
           </button>
         </div>
@@ -90,11 +90,11 @@ export default function Article() {
         <DocsSidebar activeSlug={article.slug} />
 
         {/* Center Main Article Content */}
-        <main className="flex-1 min-w-0 bg-white border border-slate-200 rounded-2xl p-6 md:p-10 shadow-sm">
+        <main className="flex-1 min-w-0 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 md:p-10 shadow-sm">
 
           {/* Category Tag & Metadata */}
-          <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-slate-500 mb-4">
-            <span className="font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200">
+          <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-slate-500 dark:text-slate-400 mb-4">
+            <span className="font-bold text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-0.5 rounded border border-emerald-200 dark:border-emerald-800">
               {article.category}
             </span>
             <span>•</span>
@@ -104,12 +104,12 @@ export default function Article() {
           </div>
 
           {/* Article Title */}
-          <h1 className="text-3xl md:text-5xl font-serif font-bold text-slate-950 leading-tight tracking-tight">
+          <h1 className="text-3xl md:text-5xl font-serif font-bold text-slate-950 dark:text-white leading-tight tracking-tight">
             {article.title}
           </h1>
 
           {/* Lead Excerpt */}
-          <p className="mt-4 text-slate-600 text-lg md:text-xl leading-relaxed border-l-4 border-emerald-500 pl-4 bg-slate-50/80 py-3 rounded-r-lg">
+          <p className="mt-4 text-slate-600 dark:text-slate-300 text-lg md:text-xl leading-relaxed border-l-4 border-emerald-500 pl-4 bg-slate-50/80 dark:bg-slate-950/60 py-3 rounded-r-lg">
             {article.excerpt}
           </p>
 
@@ -117,10 +117,10 @@ export default function Article() {
           <div className="mt-10 space-y-8 font-sans">
             {article.sections.map(([heading, body], idx) => (
               <section key={heading} id={`section-${idx}`} className="scroll-mt-24">
-                <h2 className="text-xl md:text-2xl font-serif font-bold text-slate-950 mb-3 flex items-center gap-2">
-                  <span className="text-emerald-600 font-mono text-sm">#</span> {heading}
+                <h2 className="text-xl md:text-2xl font-serif font-bold text-slate-950 dark:text-white mb-3 flex items-center gap-2">
+                  <span className="text-emerald-600 dark:text-emerald-400 font-mono text-sm">#</span> {heading}
                 </h2>
-                <p className="text-slate-700 text-base leading-relaxed">
+                <p className="text-slate-700 dark:text-slate-300 text-base leading-relaxed">
                   {body}
                 </p>
 
@@ -178,24 +178,24 @@ export default function Article() {
           </div>
 
           {/* Previous / Next Documentation Navigation */}
-          <div className="mt-10 pt-6 border-t border-slate-200 grid sm:grid-cols-2 gap-4 text-xs">
+          <div className="mt-10 pt-6 border-t border-slate-200 dark:border-slate-800 grid sm:grid-cols-2 gap-4 text-xs">
             {prevArticle ? (
               <Link
                 to={`/wiki/${prevArticle.slug}`}
-                className="p-4 rounded-xl border border-slate-200 hover:border-emerald-500 hover:bg-slate-50 transition-all text-left block"
+                className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-emerald-500 dark:hover:border-emerald-500 hover:bg-slate-50 dark:hover:bg-slate-950/50 transition-all text-left block"
               >
                 <span className="text-[10px] font-mono uppercase text-slate-400 block mb-1">← Previous Doc</span>
-                <span className="font-bold text-slate-900 line-clamp-1">{prevArticle.title}</span>
+                <span className="font-bold text-slate-900 dark:text-white line-clamp-1">{prevArticle.title}</span>
               </Link>
             ) : <div />}
 
             {nextArticle ? (
               <Link
                 to={`/wiki/${nextArticle.slug}`}
-                className="p-4 rounded-xl border border-slate-200 hover:border-emerald-500 hover:bg-slate-50 transition-all text-right block ml-auto w-full"
+                className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-emerald-500 dark:hover:border-emerald-500 hover:bg-slate-50 dark:hover:bg-slate-950/50 transition-all text-right block ml-auto w-full"
               >
                 <span className="text-[10px] font-mono uppercase text-slate-400 block mb-1">Next Doc →</span>
-                <span className="font-bold text-slate-900 line-clamp-1">{nextArticle.title}</span>
+                <span className="font-bold text-slate-900 dark:text-white line-clamp-1">{nextArticle.title}</span>
               </Link>
             ) : <div />}
           </div>
@@ -203,12 +203,12 @@ export default function Article() {
         </main>
 
         {/* Right Sidebar: Table of Contents & Quick Actions */}
-        <aside className="w-full lg:w-64 flex-shrink-0 text-slate-700 text-xs py-2 lg:py-0">
+        <aside className="w-full lg:w-64 flex-shrink-0 text-slate-700 dark:text-slate-300 text-xs py-2 lg:py-0">
           <div className="sticky top-20 space-y-6">
 
             {/* Table of Contents */}
-            <div className="bg-white border border-slate-200 rounded-xl p-4">
-              <h4 className="font-mono text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-3">
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4">
+              <h4 className="font-mono text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3">
                 On this page
               </h4>
               <ul className="space-y-2">
@@ -216,7 +216,7 @@ export default function Article() {
                   <li key={heading}>
                     <a
                       href={`#section-${idx}`}
-                      className="text-slate-600 hover:text-emerald-600 transition-colors block truncate"
+                      className="text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors block truncate"
                     >
                       {heading}
                     </a>

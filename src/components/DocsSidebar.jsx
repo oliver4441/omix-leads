@@ -15,13 +15,13 @@ export default function DocsSidebar({ activeSlug }) {
   }
 
   return (
-    <aside className="w-full lg:w-64 flex-shrink-0 text-slate-700 text-sm py-6 lg:py-8 lg:pr-6 border-b lg:border-b-0 lg:border-r border-slate-200">
+    <aside className="w-full lg:w-64 flex-shrink-0 text-slate-700 dark:text-slate-300 text-sm py-6 lg:py-8 lg:pr-6 border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-slate-800 transition-colors">
       <div className="sticky top-20 space-y-8">
 
         {/* Navigation Group: GET STARTED / WHY OMIX */}
         <div>
-          <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-slate-400 mb-3 font-mono">
-            <Sparkles size={13} className="text-emerald-600" /> Get Started & Why OMIX
+          <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-3 font-mono">
+            <Sparkles size={13} className="text-emerald-600 dark:text-emerald-400" /> Get Started & Why OMIX
           </div>
           <ul className="space-y-1 font-medium text-xs">
             <li>
@@ -29,8 +29,8 @@ export default function DocsSidebar({ activeSlug }) {
                 to="/wiki"
                 className={`flex items-center justify-between px-2.5 py-1.5 rounded-md transition-colors ${
                   location.pathname === '/wiki' && !activeSlug
-                    ? 'bg-slate-900 text-white font-semibold'
-                    : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                    ? 'bg-slate-900 dark:bg-slate-800 text-white font-semibold'
+                    : 'text-slate-600 dark:text-slate-400 hover:bg-slate-200/60 dark:hover:bg-slate-900 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
                 <span>Documentation Overview</span>
@@ -43,8 +43,8 @@ export default function DocsSidebar({ activeSlug }) {
                   to={`/wiki/${art.slug}`}
                   className={`flex items-center justify-between px-2.5 py-1.5 rounded-md transition-colors ${
                     isLinkActive(art.slug)
-                      ? 'bg-emerald-50 text-emerald-900 font-semibold border-l-2 border-emerald-500'
-                      : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                      ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-900 dark:text-emerald-300 font-semibold border-l-2 border-emerald-500'
+                      : 'text-slate-600 dark:text-slate-400 hover:bg-slate-200/60 dark:hover:bg-slate-900 hover:text-slate-900 dark:hover:text-white'
                   }`}
                 >
                   <span className="truncate">{art.title}</span>
@@ -56,8 +56,8 @@ export default function DocsSidebar({ activeSlug }) {
 
         {/* Navigation Group: CAPABILITIES & ENGINEERING */}
         <div>
-          <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-slate-400 mb-3 font-mono">
-            <Layers size={13} className="text-slate-500" /> Capabilities & Engineering
+          <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-3 font-mono">
+            <Layers size={13} className="text-slate-500 dark:text-slate-400" /> Capabilities & Engineering
           </div>
           <ul className="space-y-1 font-medium text-xs">
             {engineering.map((art) => (
@@ -66,8 +66,8 @@ export default function DocsSidebar({ activeSlug }) {
                   to={`/wiki/${art.slug}`}
                   className={`flex items-center justify-between px-2.5 py-1.5 rounded-md transition-colors ${
                     isLinkActive(art.slug)
-                      ? 'bg-emerald-50 text-emerald-900 font-semibold border-l-2 border-emerald-500'
-                      : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                      ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-900 dark:text-emerald-300 font-semibold border-l-2 border-emerald-500'
+                      : 'text-slate-600 dark:text-slate-400 hover:bg-slate-200/60 dark:hover:bg-slate-900 hover:text-slate-900 dark:hover:text-white'
                   }`}
                 >
                   <span className="truncate">{art.title}</span>
@@ -79,8 +79,8 @@ export default function DocsSidebar({ activeSlug }) {
 
         {/* Navigation Group: PRODUCTS & CASE STUDIES */}
         <div>
-          <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-slate-400 mb-3 font-mono">
-            <PackageCheck size={13} className="text-slate-500" /> Products & Case Studies
+          <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-3 font-mono">
+            <PackageCheck size={13} className="text-slate-500 dark:text-slate-400" /> Products & Case Studies
           </div>
           <ul className="space-y-1 font-medium text-xs">
             {products.map((art) => (
@@ -89,8 +89,8 @@ export default function DocsSidebar({ activeSlug }) {
                   to={`/wiki/${art.slug}`}
                   className={`flex items-center justify-between px-2.5 py-1.5 rounded-md transition-colors ${
                     isLinkActive(art.slug)
-                      ? 'bg-emerald-50 text-emerald-900 font-semibold border-l-2 border-emerald-500'
-                      : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                      ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-900 dark:text-emerald-300 font-semibold border-l-2 border-emerald-500'
+                      : 'text-slate-600 dark:text-slate-400 hover:bg-slate-200/60 dark:hover:bg-slate-900 hover:text-slate-900 dark:hover:text-white'
                   }`}
                 >
                   <span className="truncate">{art.title}</span>
@@ -101,7 +101,7 @@ export default function DocsSidebar({ activeSlug }) {
         </div>
 
         {/* OMIX Store Conversion Box in Sidebar */}
-        <div className="rounded-xl bg-gradient-to-br from-slate-950 to-slate-900 text-white p-4 text-xs border border-slate-800 shadow-md">
+        <div className="rounded-xl bg-gradient-to-br from-slate-900 to-slate-950 text-white p-4 text-xs border border-slate-800 shadow-md">
           <div className="flex items-center gap-1.5 text-[10px] uppercase font-mono tracking-wider text-emerald-400 font-semibold mb-1">
             <Zap size={13} /> Built by OMIX Systems
           </div>
