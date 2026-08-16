@@ -1,270 +1,58 @@
 import { Link } from 'react-router-dom'
-import { Bell, Store, Gift, Search, Calculator, ArrowRight, ShoppingCart, Users, Globe, Star, TrendingUp, Shield } from 'lucide-react'
-import { OMIX_STORE_URL } from '../lib/constants'
+import { ArrowRight, BookOpen, ExternalLink, Search, Code2, Cloud, ShieldCheck, Boxes } from 'lucide-react'
 
-const storeCards = [
-  {
-    icon: Bell,
-    title: 'Deal Alerts',
-    desc: 'Get notified about hot deals and price drops on products you love across Kenya.',
-    link: '/deals',
-    gradient: 'from-red-500 to-orange-500',
-  },
-  {
-    icon: Store,
-    title: 'Sell on Omix',
-    desc: 'List your products and reach thousands of customers across all 47 counties.',
-    link: '/sell',
-    gradient: 'from-orange-500 to-amber-500',
-  },
-  {
-    icon: Gift,
-    title: 'Refer & Earn',
-    desc: 'Share your referral code and earn KES 100 for every friend who shops or sells.',
-    link: '/referral',
-    gradient: 'from-pink-500 to-rose-500',
-  },
+const articles = [
+  { category: 'Engineering', title: 'Designing modular software systems that can evolve', excerpt: 'Why clear boundaries, contracts and small deployable modules make digital products easier to maintain.', date: 'Engineering note' },
+  { category: 'Architecture', title: 'APIs as the connective tissue of a modern product', excerpt: 'A practical look at integration boundaries, authentication, data contracts and reliable services.', date: 'Architecture note' },
+  { category: 'Products', title: 'What we learn from building digital products', excerpt: 'Notes on product decisions, trade-offs and the systems behind Veyra, Phikila and future OMIX products.', date: 'Product note' },
+  { category: 'Business Technology', title: 'When a business needs software instead of another spreadsheet', excerpt: 'Signals that a workflow has become complex enough to justify a purpose-built system.', date: 'Business note' },
 ]
 
-const systemsCards = [
-  {
-    icon: Search,
-    title: 'Free Business Audit',
-    desc: 'Get a free digital presence score and actionable tips to grow your business online.',
-    link: '/audit',
-    gradient: 'from-violet-500 to-purple-500',
-  },
-  {
-    icon: Calculator,
-    title: 'Get a Website Quote',
-    desc: 'Custom website pricing — pick features, see your instant quote in KES.',
-    link: '/quote',
-    gradient: 'from-purple-500 to-indigo-500',
-  },
-]
-
-const stats = [
-  { value: '5,000+', label: 'Products Listed', icon: ShoppingCart },
-  { value: '1,200+', label: 'Happy Customers', icon: Users },
-  { value: '47', label: 'Counties Served', icon: Globe },
-]
-
-const reasons = [
-  { icon: Star, title: 'Local Focus', desc: 'Built specifically for Kenyan businesses and shoppers, with M-Pesa and local delivery in mind.' },
-  { icon: TrendingUp, title: 'Grow Faster', desc: 'List products, get a website, or find deals — all designed to help you scale.' },
-  { icon: Shield, title: 'Trusted Platform', desc: 'Thousands of Kenyan businesses trust Omix for their digital growth.' },
+const topics = [
+  ['Engineering', Code2], ['Architecture', Boxes], ['Cloud & Infrastructure', Cloud], ['Security', ShieldCheck],
 ]
 
 export default function Home() {
   return (
-    <div className="min-h-screen">
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-brand via-brand-dark to-purple-700 text-white">
-        {/* Background pattern */}
-        <div className="absolute inset-0 opacity-[0.07]">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }} />
-        </div>
-
-        {/* Floating gradient orbs */}
-        <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-white/5 blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 rounded-full bg-white/5 blur-3xl" />
-
-        <div className="relative max-w-6xl mx-auto px-4 py-24 md:py-32 text-center">
-          <div className="animate-fade-in">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 text-sm font-medium mb-6">
-              <Star className="w-3.5 h-3.5" />
-              Trusted by 1,200+ Kenyan businesses
+    <div>
+      <section className="border-b border-slate-200 bg-white">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 py-20 md:py-28">
+          <div className="max-w-4xl">
+            <p className="text-sm font-semibold tracking-[0.18em] uppercase text-slate-500 mb-5">OMIX JOURNAL · KNOWLEDGE BASE</p>
+            <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl leading-[0.98] tracking-tight text-slate-950 mb-7">Ideas, engineering notes and lessons from building software.</h1>
+            <p className="text-lg md:text-xl leading-8 text-slate-600 max-w-2xl mb-9">A wiki-style publication from OMIX Digital Solutions covering software engineering, architecture, product development, cloud systems and business technology.</p>
+            <div className="flex flex-wrap gap-3">
+              <a href="https://omixsystems.com" className="inline-flex items-center gap-2 rounded-lg bg-slate-950 text-white px-5 py-3 font-semibold hover:bg-slate-800 transition-colors">Visit OMIX Systems <ArrowRight size={17} /></a>
+              <a href="https://admin.omixsystems.store" className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-3 font-semibold text-slate-800 hover:border-slate-500 transition-colors">Gideon Langat <ExternalLink size={16} /></a>
             </div>
           </div>
-
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-5 drop-shadow-lg animate-slide-up">
-            Grow Your Business
-            <br />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-200 to-yellow-100">
-              with Omix
-            </span>
-          </h1>
-
-          <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-10 animate-slide-up" style={{ animationDelay: '0.1s' }}>
-            Shop deals, sell products, or get a professional website — all in one place for Kenyan businesses.
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-4 animate-slide-up" style={{ animationDelay: '0.2s' }}>
-            <a
-              href={OMIX_STORE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2 bg-white text-brand font-semibold px-6 py-3.5 rounded-xl hover:shadow-xl hover:scale-105 active:scale-[1.02] transition-all shadow-lg"
-            >
-              <ShoppingCart size={20} />
-              Shop Now
-              <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
-            </a>
-            <Link
-              to="/audit"
-              className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white font-semibold px-6 py-3.5 rounded-xl hover:bg-white/20 transition-all border border-white/20 hover:border-white/30"
-            >
-              <Search size={20} />
-              Free Audit
-            </Link>
-            <Link
-              to="/quote"
-              className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white font-semibold px-6 py-3.5 rounded-xl hover:bg-white/20 transition-all border border-white/20 hover:border-white/30"
-            >
-              <Calculator size={20} />
-              Get a Quote
-            </Link>
-          </div>
         </div>
       </section>
 
-      {/* Stats bar */}
-      <section className="relative -mt-10 z-10">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="bg-white rounded-2xl shadow-xl border border-zinc-100 p-6 md:p-8 grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {stats.map((s, i) => (
-              <div
-                key={s.label}
-                className="flex items-center gap-4 animate-slide-up"
-                style={{ animationDelay: `${0.3 + i * 0.1}s` }}
-              >
-                <div className="w-12 h-12 rounded-xl bg-brand-bg flex items-center justify-center shrink-0">
-                  <s.icon className="text-brand" size={22} />
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-zinc-900">{s.value}</div>
-                  <div className="text-sm text-zinc-500">{s.label}</div>
-                </div>
-              </div>
-            ))}
+      <section className="border-b border-slate-200 bg-[#f7f8fa]">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 py-10 grid lg:grid-cols-[1fr_320px] gap-10">
+          <div>
+            <div className="flex items-center justify-between mb-6"><h2 className="font-serif text-3xl text-slate-950">Latest notes</h2><span className="text-sm text-slate-500">Curated by OMIX</span></div>
+            <div className="space-y-4">
+              {articles.map((a) => <article key={a.title} className="bg-white border border-slate-200 rounded-xl p-6 hover:border-slate-400 transition-colors"><div className="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3"><span>{a.category}</span><span>·</span><span>{a.date}</span></div><h3 className="font-serif text-2xl text-slate-950 mb-2">{a.title}</h3><p className="text-slate-600 leading-7 max-w-2xl">{a.excerpt}</p><button className="mt-4 text-sm font-semibold text-slate-900 inline-flex items-center gap-1">Read note <ArrowRight size={14} /></button></article>)}
+            </div>
           </div>
+          <aside className="lg:border-l lg:border-slate-200 lg:pl-8">
+            <div className="sticky top-24">
+              <h2 className="text-xs font-bold tracking-[0.18em] uppercase text-slate-500 mb-4">Explore the wiki</h2>
+              <div className="space-y-2">{topics.map(([name, Icon]) => <a key={name} href="#topics" className="flex items-center justify-between p-3 rounded-lg hover:bg-white border border-transparent hover:border-slate-200 transition-colors"><span className="flex items-center gap-3 font-medium"><Icon size={17} className="text-slate-500" />{name}</span><ArrowRight size={15} className="text-slate-400" /></a>)}</div>
+              <div className="mt-8 rounded-xl bg-slate-950 text-white p-6"><p className="text-xs uppercase tracking-wider text-slate-400 mb-2">Build with OMIX</p><h3 className="font-serif text-2xl mb-3">Have a system to build?</h3><p className="text-sm leading-6 text-slate-300 mb-5">Take the conversation from an idea to a practical digital product.</p><a href="https://omixsystems.com/#contact" className="inline-flex items-center gap-2 font-semibold text-white">Discuss a project <ArrowRight size={15} /></a></div>
+            </div>
+          </aside>
         </div>
       </section>
 
-      {/* Why Omix */}
-      <section className="py-16 md:py-20 bg-warm">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-4xl font-bold text-zinc-900 mb-3">
-              Why Omix?
-            </h2>
-            <p className="text-zinc-500 max-w-xl mx-auto">
-              Everything you need to grow your business — from shopping to selling to building your online presence.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {reasons.map((r, i) => (
-              <div
-                key={r.title}
-                className="bg-white rounded-2xl p-6 border border-zinc-100 card-hover"
-              >
-                <div className="w-10 h-10 rounded-xl bg-brand-bg flex items-center justify-center mb-4">
-                  <r.icon className="text-brand" size={20} />
-                </div>
-                <h3 className="font-semibold text-zinc-900 mb-2">{r.title}</h3>
-                <p className="text-sm text-zinc-500 leading-relaxed">{r.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+      <section id="topics" className="bg-white border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 py-16"><div className="flex items-center gap-3 mb-8"><BookOpen size={21} /><h2 className="font-serif text-3xl">Knowledge areas</h2></div><div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">{topics.map(([name, Icon]) => <div key={name} className="border border-slate-200 rounded-xl p-6"><Icon size={22} className="mb-5 text-slate-500" /><h3 className="font-semibold mb-2">{name}</h3><p className="text-sm leading-6 text-slate-600">Notes, guides and practical thinking around {name.toLowerCase()}.</p></div>)}</div></div>
       </section>
 
-      {/* Store Section */}
-      <section className="py-16 md:py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-4xl font-bold text-zinc-900 mb-3">
-              Omix Store
-            </h2>
-            <p className="text-zinc-500 max-w-xl mx-auto">
-              Shop, sell, and save — all on the Omix marketplace.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {storeCards.map((card) => (
-              <Link
-                key={card.title}
-                to={card.link}
-                className="group relative bg-white rounded-2xl p-6 border border-zinc-100 card-hover overflow-hidden"
-              >
-                {/* Gradient accent */}
-                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${card.gradient} opacity-60`} />
-                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${card.gradient} flex items-center justify-center mb-4 shadow-sm`}>
-                  <card.icon size={22} className="text-white" />
-                </div>
-                <h3 className="text-lg font-semibold text-zinc-900 mb-2 group-hover:text-brand transition-colors">{card.title}</h3>
-                <p className="text-sm text-zinc-500 mb-4 leading-relaxed">{card.desc}</p>
-                <span className="inline-flex items-center gap-1 text-brand text-sm font-medium group-hover:gap-2 transition-all">
-                  Learn more <ArrowRight size={14} />
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Systems Section */}
-      <section className="py-16 md:py-20 bg-warm">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-4xl font-bold text-zinc-900 mb-3">
-              Omix Systems
-            </h2>
-            <p className="text-zinc-500 max-w-xl mx-auto">
-              Professional websites & digital solutions for your business.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {systemsCards.map((card) => (
-              <Link
-                key={card.title}
-                to={card.link}
-                className="group relative bg-white rounded-2xl p-6 border border-zinc-100 card-hover overflow-hidden"
-              >
-                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${card.gradient} opacity-60`} />
-                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${card.gradient} flex items-center justify-center mb-4 shadow-sm`}>
-                  <card.icon size={22} className="text-white" />
-                </div>
-                <h3 className="text-lg font-semibold text-zinc-900 mb-2 group-hover:text-brand transition-colors">{card.title}</h3>
-                <p className="text-sm text-zinc-500 mb-4 leading-relaxed">{card.desc}</p>
-                <span className="inline-flex items-center gap-1 text-purple-600 text-sm font-medium group-hover:gap-2 transition-all">
-                  Get started <ArrowRight size={14} />
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-16 md:py-20 bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-900 text-white">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-2xl md:text-4xl font-bold mb-4">
-            Ready to Take Your Business Online?
-          </h2>
-          <p className="text-zinc-400 mb-10 max-w-xl mx-auto">
-            Get a free digital audit or an instant website quote — no commitment required, no strings attached.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link
-              to="/audit"
-              className="group inline-flex items-center gap-2 bg-white text-zinc-900 font-semibold px-6 py-3.5 rounded-xl hover:shadow-xl hover:scale-105 active:scale-[1.02] transition-all"
-            >
-              <Search size={18} />
-              Free Audit
-              <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
-            </Link>
-            <Link
-              to="/quote"
-              className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white font-semibold px-6 py-3.5 rounded-xl hover:bg-white/20 transition-all border border-white/20"
-            >
-              <Calculator size={18} />
-              Get a Quote
-            </Link>
-          </div>
-        </div>
+      <section className="bg-slate-50">
+        <div className="max-w-5xl mx-auto px-5 sm:px-8 py-16 text-center"><Search className="mx-auto mb-4 text-slate-500" /><h2 className="font-serif text-3xl text-slate-950 mb-3">The Journal is part of the OMIX network.</h2><p className="text-slate-600 max-w-2xl mx-auto mb-7">Learn from the work, explore our products, or work with the company behind them.</p><div className="flex flex-wrap justify-center gap-3"><a href="https://omixsystems.com" className="rounded-lg bg-slate-950 text-white px-5 py-3 font-semibold">OMIX Systems</a><a href="https://phikila.com" className="rounded-lg border border-slate-300 bg-white px-5 py-3 font-semibold">Phikila</a><a href="https://web-jade-one-82.vercel.app/?type=series" className="rounded-lg border border-slate-300 bg-white px-5 py-3 font-semibold">Veyra</a></div></div>
       </section>
     </div>
   )
