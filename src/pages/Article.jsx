@@ -20,7 +20,7 @@ export default function Article() {
         <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-slate-500"><BookOpen size={14} /> Built by OMIX</div>
         <h2 className="mt-3 text-2xl font-serif font-semibold">Have a system like this in mind?</h2>
         <p className="mt-2 text-slate-600">OMIX builds modular digital products, business systems and integrations.</p>
-        <a href="https://omixsystems.com/" className="mt-5 inline-flex items-center gap-2 font-semibold text-slate-950">Discuss a project <ArrowRight size={16} /></a>
+        <a href="https://omixsystems.store/" className="mt-5 inline-flex items-center gap-2 font-semibold text-slate-950">Discuss a project <ArrowRight size={16} /></a>
       </div>
     </div>
   </article>
