@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -13,17 +13,19 @@ function ScrollToTop() {
 }
 
 export default function App() {
+  const [searchFilter, setSearchFilter] = useState('')
+
   return (
-    <div className="min-h-screen flex flex-col bg-[#f7f8fa] text-slate-900">
+    <div className="min-h-screen flex flex-col bg-[#f8fafc] text-slate-900 font-sans">
       <ScrollToTop />
-      <Navbar />
+      <Navbar searchFilter={searchFilter} setSearchFilter={setSearchFilter} />
       <main className="flex-grow">
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/wiki" element={<Wiki />} />
+          <Route path="/" element={<Home searchFilter={searchFilter} />} />
+          <Route path="/wiki" element={<Wiki searchFilter={searchFilter} />} />
           <Route path="/wiki/:slug" element={<Article />} />
           <Route path="/articles/:slug" element={<Article />} />
-          <Route path="/category/:category" element={<Wiki />} />
+          <Route path="/category/:category" element={<Wiki searchFilter={searchFilter} />} />
           <Route path="*" element={<Navigate to="/wiki" replace />} />
         </Routes>
       </main>

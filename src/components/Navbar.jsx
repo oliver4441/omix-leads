@@ -1,21 +1,120 @@
 import { Link, useLocation } from 'react-router-dom'
-import { Menu, X, ExternalLink } from 'lucide-react'
+import { Menu, X, ExternalLink, Search, Sparkles, BookOpen, Layers } from 'lucide-react'
 import { useState, useEffect } from 'react'
 
-export default function Navbar() {
+export default function Navbar({ searchFilter, setSearchFilter }) {
   const [open, setOpen] = useState(false)
   const loc = useLocation()
   useEffect(() => setOpen(false), [loc.pathname])
 
-  return <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200">
-    <div className="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
-      <Link to="/" className="flex items-center gap-3">
-        <img src="/omix-logo.svg" alt="OMIX Systems" className="w-10 h-10 rounded-lg object-cover ring-1 ring-slate-200" />
-        <div><div className="font-serif font-bold text-lg leading-none">OMIX Journal</div><div className="text-[10px] uppercase tracking-wider text-slate-500 mt-1">Knowledge Base</div></div>
-      </Link>
-      <div className="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600"><a href="#topics" className="hover:text-slate-950">Topics</a><a href="#latest" className="hover:text-slate-950">Latest</a><a href="https://omixsystems.store" className="inline-flex items-center gap-1.5 text-slate-950">OMIX Systems <ExternalLink size={13}/></a></div>
-      <button onClick={() => setOpen(!open)} className="md:hidden w-10 h-10 grid place-items-center" aria-label="Toggle menu">{open ? <X/> : <Menu/>}</button>
-    </div>
-    {open && <div className="md:hidden border-t border-slate-200 bg-white px-5 py-5 space-y-4 text-sm font-medium"><a className="block" href="#topics">Topics</a><a className="block" href="#latest">Latest</a><a className="block" href="https://omixsystems.store">OMIX Systems →</a><a className="block" href="https://admin.omixsystems.store">Gideon Langat →</a></div>}
-  </nav>
+  return (
+    <header className="sticky top-0 z-50 bg-slate-950 text-white border-b border-slate-800 backdrop-blur-md bg-opacity-95">
+      <div className="max-w-[1500px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+        {/* Brand Logo & Title */}
+        <div className="flex items-center gap-4">
+          <Link to="/wiki" className="flex items-center gap-3 group">
+            <img
+              src="/omix-logo.svg"
+              alt="OMIX Systems"
+              className="w-9 h-9 rounded-lg object-cover ring-2 ring-emerald-500/30 group-hover:ring-emerald-400 transition-all"
+            />
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="font-semibold text-white tracking-tight font-serif text-lg">OMIX</span>
+                <span className="bg-emerald-500/20 text-emerald-300 text-[10px] font-mono px-2 py-0.5 rounded border border-emerald-500/30 uppercase tracking-wider font-semibold">Docs & Journal</span>
+              </div>
+              <p className="text-[11px] text-slate-400 hidden sm:block font-mono">Software Architecture & Systems</p>
+            </div>
+          </Link>
+        </div>
+
+        {/* Global Search Bar */}
+        <div className="hidden md:flex flex-1 max-w-md mx-4">
+          <div className="relative w-full">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
+            <input
+              type="text"
+              placeholder="Search docs, features, why choose OMIX..."
+              value={searchFilter || ''}
+              onChange={(e) => setSearchFilter && setSearchFilter(e.target.value)}
+              className="w-full bg-slate-900/90 text-sm text-slate-200 placeholder-slate-500 pl-9 pr-12 py-1.5 rounded-lg border border-slate-800 focus:outline-none focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/60 transition-all font-sans"
+            />
+            <kbd className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] font-mono text-slate-400 bg-slate-800 border border-slate-700 px-1.5 py-0.5 rounded">
+              ⌘K
+            </kbd>
+          </div>
+        </div>
+
+        {/* Header Links & CTA */}
+        <div className="hidden lg:flex items-center gap-5 text-xs font-medium text-slate-300">
+          <Link to="/wiki" className="hover:text-emerald-400 transition-colors flex items-center gap-1.5">
+            <BookOpen size={14} /> Documentation
+          </Link>
+          <Link to="/category/why-omix" className="hover:text-emerald-400 transition-colors flex items-center gap-1.5">
+            <Sparkles size={14} className="text-emerald-400" /> Why OMIX?
+          </Link>
+          <Link to="/category/engineering" className="hover:text-emerald-400 transition-colors flex items-center gap-1.5">
+            <Layers size={14} /> Engineering
+          </Link>
+          <a
+            href="https://omixsystems.store"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-emerald-400 transition-colors flex items-center gap-1"
+          >
+            omixsystems.store <ExternalLink size={12} />
+          </a>
+          <a
+            href="https://omixsystems.store/#contact"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold px-3.5 py-1.5 rounded-md text-xs transition-colors flex items-center gap-1.5 shadow-sm shadow-emerald-950"
+          >
+            Discuss a Project →
+          </a>
+        </div>
+
+        {/* Mobile menu button */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="lg:hidden p-2 text-slate-300 hover:text-white rounded-lg hover:bg-slate-900"
+          aria-label="Toggle menu"
+        >
+          {open ? <X size={20}/> : <Menu size={20}/>}
+        </button>
+      </div>
+
+      {/* Mobile navigation panel */}
+      {open && (
+        <div className="lg:hidden border-t border-slate-800 bg-slate-950 px-5 py-4 space-y-3 text-sm font-medium">
+          <div className="relative w-full mb-3">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
+            <input
+              type="text"
+              placeholder="Search docs & articles..."
+              value={searchFilter || ''}
+              onChange={(e) => setSearchFilter && setSearchFilter(e.target.value)}
+              className="w-full bg-slate-900 text-sm text-slate-200 placeholder-slate-500 pl-9 pr-4 py-2 rounded-lg border border-slate-800 focus:outline-none focus:border-emerald-500"
+            />
+          </div>
+          <Link to="/wiki" className="block text-slate-200 hover:text-emerald-400 py-1">📚 Documentation Index</Link>
+          <Link to="/category/why-omix" className="block text-slate-200 hover:text-emerald-400 py-1">✨ Why Choose OMIX?</Link>
+          <Link to="/category/engineering" className="block text-slate-200 hover:text-emerald-400 py-1">⚙️ Engineering & Architecture</Link>
+          <Link to="/category/products" className="block text-slate-200 hover:text-emerald-400 py-1">🚀 Products & Case Studies</Link>
+          <a href="https://omixsystems.store" className="block text-emerald-400 hover:underline py-1 flex items-center gap-1">
+            Visit OMIX Systems (omixsystems.store) <ExternalLink size={13} />
+          </a>
+          <a href="https://omixsystems.store/#pricing" className="block text-slate-200 hover:text-emerald-400 py-1">
+            Pricing & Packages
+          </a>
+          <a
+            href="https://omixsystems.store/#contact"
+            className="block text-center bg-emerald-500 text-slate-950 font-bold py-2 rounded-lg mt-3"
+          >
+            Discuss a Project →
+          </a>
+        </div>
+      )}
+    </header>
+  )
 }
