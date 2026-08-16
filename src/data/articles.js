@@ -37,6 +37,63 @@ export const articles = [
       ['The platform approach', 'Phikila approaches school management as one connected system, allowing operational workflows to share the same underlying data and permissions.'],
       ['The goal', 'The objective is not simply to digitise forms. It is to reduce administrative friction while giving schools reliable information for daily decisions.']
     ]
+  },
+  {
+    slug: 'why-choose-omix',
+    title: 'Why Choose OMIX for Your Digital Product?',
+    category: 'Why OMIX',
+    excerpt: 'What separates an integrated product engineering partner from a company that simply delivers a website.',
+    readTime: '6 min read',
+    date: '2026-08-16',
+    sections: [
+      ['We think beyond the interface', 'A useful product is more than a polished frontend. We consider the data model, APIs, authentication, integrations, deployment and operational workflow that make the product actually work.'],
+      ['Integration is part of the design', 'OMIX is built around Optimal Modular Integration Experts. External services, payments, business workflows and internal systems are treated as architecture concerns rather than last-minute add-ons.'],
+      ['You get a path beyond the MVP', 'We prefer modular foundations that can be extended as requirements become clearer. The aim is to avoid rebuilding the entire system every time the business grows.'],
+      ['We build products, not just deliverables', 'Our own products such as Veyra and Phikila give us direct experience with the trade-offs involved in shipping and operating software.'],
+      ['A practical choice', 'OMIX is a strong fit when you need one technical partner to move from problem definition through architecture, implementation, integration and deployment.']
+    ]
+  },
+  {
+    slug: 'omix-vs-generic-agency',
+    title: 'OMIX vs. a Generic Web Agency: What Is the Difference?',
+    category: 'Why OMIX',
+    excerpt: 'When a business needs software infrastructure rather than a brochure site, the delivery model matters.',
+    readTime: '5 min read',
+    date: '2026-08-16',
+    sections: [
+      ['Website delivery vs. system delivery', 'A conventional agency may optimise for pages and visual presentation. OMIX approaches a digital engagement as a system when the workflow requires data, roles, APIs, payments or automation.'],
+      ['One architecture across the project', 'Frontend, backend, database and third-party services should have explicit boundaries. This reduces duplicated logic and makes future changes safer.'],
+      ['Operations after launch', 'Deployment, domains, integrations, monitoring and maintenance are part of the lifecycle. A production system should not become an orphan after the final design review.'],
+      ['When an agency is enough', 'If you only need a simple brochure site, a specialised design agency may be the right choice. OMIX becomes more valuable as the software itself becomes part of the business operation.']
+    ]
+  },
+  {
+    slug: 'built-to-integrate',
+    title: 'Built to Integrate: Why We Make Integration a First-Class Requirement',
+    category: 'Why OMIX',
+    excerpt: 'Modern businesses depend on connected services. Architecture should acknowledge that from day one.',
+    readTime: '5 min read',
+    date: '2026-08-16',
+    sections: [
+      ['The modern stack is connected', 'Payments, messaging, identity, analytics, storage and business tools rarely live in one system. Integration boundaries are therefore part of normal product architecture.'],
+      ['Designing clear contracts', 'Stable APIs, validation, authentication and predictable error handling make integrations easier to test and replace.'],
+      ['Reducing vendor lock-in', 'A modular integration layer can isolate external providers. That makes it easier to change a service when pricing, capabilities or business requirements change.'],
+      ['The OMIX principle', 'We design systems so the pieces can communicate without becoming inseparable. That is the practical meaning behind our integration-first approach.']
+    ]
+  },
+  {
+    slug: 'transparent-software-delivery',
+    title: 'What a Transparent Software Delivery Process Looks Like',
+    category: 'Why OMIX',
+    excerpt: 'How clear scope, visible milestones and production validation reduce surprises during a software project.',
+    readTime: '4 min read',
+    date: '2026-08-16',
+    sections: [
+      ['Start with the problem', 'Before implementation, define the users, workflow, constraints, integrations and outcome. This creates a reference point for technical decisions.'],
+      ['Make progress visible', 'Work should be divided into meaningful milestones so stakeholders can evaluate direction before everything is finished.'],
+      ['Validate the live system', 'A project is not complete when code compiles. Domains, authentication, data flows, integrations and the production experience need validation.'],
+      ['Keep the system maintainable', 'Documentation, modular code and a clear deployment path reduce the cost of the next change after launch.']
+    ]
   }
 ]
 
