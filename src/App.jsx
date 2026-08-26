@@ -5,6 +5,13 @@ import Footer from './components/Footer'
 import Home from './pages/Home'
 import Wiki from './pages/Wiki'
 import Article from './pages/Article'
+import QuoteCalculator from './pages/QuoteCalculator'
+import ReferralPage from './pages/ReferralPage'
+import SellOnOmix from './pages/SellOnOmix'
+import BusinessAudit from './pages/BusinessAudit'
+import DealAlerts from './pages/DealAlerts'
+import AdminDashboard from './pages/AdminDashboard'
+import AdminLogin from './pages/AdminLogin'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -24,6 +31,13 @@ export default function App() {
           <Route path="/wiki/:slug" element={<Article />} />
           <Route path="/articles/:slug" element={<Article />} />
           <Route path="/category/:category" element={<Wiki />} />
+          <Route path="/quote" element={<QuoteCalculator />} />
+          <Route path="/referral" element={<ReferralPage />} />
+          <Route path="/sell-on-omix" element={<SellOnOmix />} />
+          <Route path="/business-audit" element={<BusinessAudit />} />
+          <Route path="/deal-alerts" element={<DealAlerts />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin" element={<AdminDashboard />} />
           <Route path="*" element={<Navigate to="/wiki" replace />} />
         </Routes>
       </main>
