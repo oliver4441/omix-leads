@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, BookOpen, ExternalLink, Code2, Cloud, ShieldCheck, Boxes, Building2 } from 'lucide-react'
+import { ArrowRight, BookOpen, ExternalLink, Code2, Cloud, ShieldCheck, Boxes, Building2, Calculator, Gift, Store, Search, Bell } from 'lucide-react'
 import { articles } from '../data/articles'
 
 const topics = [
@@ -36,6 +36,28 @@ export default function Home() {
         </div>
       </section>
       <section id="topics" className="bg-white border-b border-slate-200"><div className="max-w-7xl mx-auto px-5 sm:px-8 py-16"><div className="flex items-center gap-3 mb-8"><BookOpen size={21} /><h2 className="font-serif text-3xl">Knowledge areas</h2></div><div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">{topics.map(([name, Icon]) => <Link key={name} to={`/category/${encodeURIComponent(name.toLowerCase().replace(/ /g, '-'))}`} className="border border-slate-200 rounded-xl p-6 hover:border-slate-400"><Icon size={22} className="mb-5 text-slate-500" /><h3 className="font-semibold mb-2">{name}</h3><p className="text-sm leading-6 text-slate-600">Notes, guides and practical thinking around {name.toLowerCase()}.</p></Link>)}</div></div></section>
+      <section className="bg-white border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 py-16">
+          <div className="flex items-center gap-3 mb-3"><Calculator size={21} /><h2 className="font-serif text-3xl">Lead tools</h2></div>
+          <p className="text-slate-600 mb-8 max-w-2xl">Everything you need to start a project, refer a client, or sell with OMIX.</p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              ['Get a Quote', 'Estimate your project cost in minutes.', '/quote', Calculator],
+              ['Refer a Friend', 'Earn rewards when referrals convert.', '/referral', Gift],
+              ['Sell on OMIX', 'List your products on the OMIX marketplace.', '/sell-on-omix', Store],
+              ['Free Business Audit', 'See where your digital presence can improve.', '/business-audit', Search],
+              ['Deal Alerts', 'Get notified about limited-time offers.', '/deal-alerts', Bell],
+              ['Admin', 'Staff dashboard for lead management.', '/admin', Building2],
+            ].map(([title, desc, to, Icon]) => (
+              <Link key={to} to={to} className="group border border-slate-200 rounded-xl p-6 hover:border-slate-400 transition-colors">
+                <Icon size={22} className="mb-4 text-slate-500" />
+                <h3 className="font-semibold mb-2 flex items-center justify-between">{title}<ArrowRight size={15} className="text-slate-400 group-hover:translate-x-0.5 transition-transform" /></h3>
+                <p className="text-sm leading-6 text-slate-600">{desc}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
       <section className="bg-slate-50"><div className="max-w-5xl mx-auto px-5 sm:px-8 py-16 text-center"><h2 className="font-serif text-3xl text-slate-950 mb-3">The Journal is part of the OMIX network.</h2><p className="text-slate-600 max-w-2xl mx-auto mb-7">Learn from the work, explore our products, or work with the company behind them.</p><div className="flex flex-wrap justify-center gap-3"><a href="https://omixsystems.store" className="rounded-lg bg-slate-950 text-white px-5 py-3 font-semibold">OMIX Systems</a><a href="https://phikila.com" className="rounded-lg border border-slate-300 bg-white px-5 py-3 font-semibold">Phikila</a><a href="https://web-jade-one-82.vercel.app/?type=series" className="rounded-lg border border-slate-300 bg-white px-5 py-3 font-semibold">Veyra</a></div></div></section>
     </div>
   )
