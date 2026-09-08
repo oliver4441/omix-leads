@@ -1,48 +1,19 @@
 import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { ArrowLeft, ArrowRight, BookOpen } from 'lucide-react'
+import { ArrowLeft, ArrowRight, BookOpen, CalendarDays } from 'lucide-react'
 import { articles } from '../data/articles'
 
 export default function Article() {
   const { slug } = useParams()
   const article = articles.find(a => a.slug === slug)
-
-  useEffect(() => {
-    if (!article) return
-    document.title = `${article.title} — OMIX Journal`
-    const description = document.querySelector('meta[name="description"]')
-    if (description) description.setAttribute('content', article.excerpt)
-  }, [article])
-
-  if (!article) return <div className="max-w-3xl mx-auto px-5 py-24"><h1 className="text-3xl font-serif">Article not found</h1><Link className="inline-flex mt-5 text-sm font-semibold" to="/wiki">← Back to the knowledge base</Link></div>
-
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: article.title,
-    description: article.excerpt,
-    datePublished: article.date,
-    author: { '@type': 'Organization', name: 'OMIX Systems', url: 'https://omixsystems.store/' },
-    publisher: { '@type': 'Organization', name: 'OMIX Systems', url: 'https://omixsystems.store/' },
-    mainEntityOfPage: `https://blog.omixsystems.store/wiki/${article.slug}`,
-  }
-
-  return <article className="bg-white min-h-screen">
-    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
-    <div className="max-w-3xl mx-auto px-5 py-12 md:py-20">
-      <Link to="/wiki" className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-slate-900"><ArrowLeft size={15} /> Knowledge Base</Link>
-      <div className="mt-10 flex items-center gap-3 text-sm text-slate-500"><span className="font-semibold text-slate-800">{article.category}</span><span>•</span><span>{article.date}</span><span>•</span><span>{article.readTime}</span></div>
-      <h1 className="mt-4 text-4xl md:text-6xl leading-tight font-serif font-semibold tracking-tight text-slate-950">{article.title}</h1>
-      <p className="mt-6 text-xl leading-8 text-slate-600">{article.excerpt}</p>
-      <div className="mt-12 space-y-10">
-        {article.sections.map(([heading, body]) => <section key={heading}><h2 className="text-2xl font-serif font-semibold text-slate-950">{heading}</h2><p className="mt-3 text-slate-700 leading-8">{body}</p></section>)}
-      </div>
-      <div className="mt-16 rounded-2xl border border-slate-200 bg-[#f7f8fa] p-7">
-        <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-slate-500"><BookOpen size={14} /> Built by OMIX</div>
-        <h2 className="mt-3 text-2xl font-serif font-semibold">Have a system like this in mind?</h2>
-        <p className="mt-2 text-slate-600">OMIX builds modular digital products, business systems and integrations.</p>
-        <a href="https://omixsystems.store/" className="mt-5 inline-flex items-center gap-2 font-semibold text-slate-950">Discuss a project <ArrowRight size={16} /></a>
-      </div>
-    </div>
+  const index = articles.findIndex(a => a.slug === slug)
+  const next = index >= 0 ? articles[index + 1] : null
+  useEffect(() => { if (article) { document.title = `${article.title} — OMIX Journal`; const meta = document.querySelector('meta[name="description"]'); if (meta) meta.setAttribute('content', article.excerpt) } }, [article])
+  if (!article) return <div className="not-found"><div className="content-wrap"><div className="section-label">404</div><h1>Article not found</h1><p>The article may have moved or the address is incorrect.</p><Link to="/wiki" className="button button-primary">Back to knowledge base <ArrowRight size={16}/></Link></div></div>
+  const structuredData = {'@context':'https://schema.org','@type':'Article',headline:article.title,description:article.excerpt,datePublished:article.date,author:{'@type':'Organization',name:'OMIX Systems',url:'https://omixsystems.store/'},publisher:{'@type':'Organization',name:'OMIX Systems',url:'https://omixsystems.store/'},mainEntityOfPage:`https://blog.omixsystems.store/wiki/${article.slug}`}
+  return <article className="article-page">
+    <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(structuredData)}} />
+    <header className="article-hero"><div className="content-wrap article-hero-inner"><Link to="/wiki" className="back-link"><ArrowLeft size={15}/> Knowledge Base</Link><div className="article-meta"><span>{article.category}</span><span>·</span><span><CalendarDays size={13}/> {article.date}</span><span>·</span><span>{article.readTime}</span></div><h1>{article.title}</h1><p>{article.excerpt}</p></div></header>
+    <div className="content-wrap article-layout"><main className="article-content">{article.sections.map(([heading, body], i) => <section key={heading}><div className="section-number">{String(i+1).padStart(2,'0')}</div><div><h2>{heading}</h2><p>{body}</p></div></section>)}<div className="article-cta"><div className="feature-icon"><BookOpen size={18}/></div><div><div className="section-label">Build with OMIX</div><h2>Have a system like this in mind?</h2><p>OMIX builds modular digital products, business systems and integrations.</p><a href="https://omixsystems.store/#contact" className="text-link">Discuss a project <ArrowRight size={15}/></a></div></div>{next && <Link to={`/wiki/${next.slug}`} className="next-article"><div><span>Next article</span><strong>{next.title}</strong></div><ArrowRight size={20}/></Link>}</main></div>
   </article>
 }
