@@ -13,10 +13,19 @@ function ScrollToTop() {
 }
 
 export default function App() {
+  const [darkMode, setDarkMode] = React.useState(() => {
+    try { return localStorage.getItem('omix-theme') === 'dark' } catch { return false }
+  })
+
+  React.useEffect(() => {
+    try { localStorage.setItem('omix-theme', darkMode ? 'dark' : 'light') } catch {}
+    document.documentElement.style.colorScheme = darkMode ? 'dark' : 'light'
+  }, [darkMode])
+
   return (
-    <div className="min-h-screen flex flex-col bg-[#f7f8fa] text-slate-900">
+    <div className={`min-h-screen flex flex-col ${darkMode ? 'theme-dark bg-[#0b0d10] text-slate-100' : 'bg-[#f7f8fa] text-slate-900'}`}>
       <ScrollToTop />
-      <Navbar />
+      <Navbar darkMode={darkMode} onToggleTheme={() => setDarkMode(v => !v)} />
       <main className="flex-grow">
         <Routes>
           <Route path="/" element={<Home />} />
