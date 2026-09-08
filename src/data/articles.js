@@ -94,6 +94,21 @@ export const articles = [
       ['Validate the live system', 'A project is not complete when code compiles. Domains, authentication, data flows, integrations and the production experience need validation.'],
       ['Keep the system maintainable', 'Documentation, modular code and a clear deployment path reduce the cost of the next change after launch.']
     ]
+  },
+  {
+    slug: 'introducing-bifrost',
+    title: 'Introducing Bifrost: One Gateway for AI Model Routing',
+    category: 'Products',
+    excerpt: 'Bifrost is a new OMIX product for routing AI workloads across models and providers through a unified gateway.',
+    readTime: '5 min read',
+    date: '2026-09-08',
+    sections: [
+      ['The problem', 'Modern AI applications increasingly depend on multiple models and providers. Teams end up maintaining separate integrations, credentials, model configurations and failure-handling paths for each provider.'],
+      ['The Bifrost approach', 'Bifrost is designed as a routing and orchestration layer between applications or agents and AI model providers. Instead of coupling every application directly to one model, workloads can pass through one programmable gateway.'],
+      ['Why routing matters', 'Different models have different strengths, costs, latency profiles and availability. A routing layer makes it possible to choose models based on workload requirements instead of hard-coding a single provider into every application.'],
+      ['Built for agents and applications', 'Bifrost is intended to fit both conventional software and AI-agent workflows. The goal is a shared infrastructure layer that can sit underneath multiple applications, agents and development environments.'],
+      ['The next layer of the OMIX ecosystem', 'Bifrost joins the OMIX product ecosystem alongside products such as Aide, Veyra, Phikila and Omni Analytics. It represents OMIX moving further into infrastructure for software teams building with AI.']
+    ]
   }
 ]
 
