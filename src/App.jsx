@@ -8,7 +8,7 @@ import Article from './pages/Article'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
-  React.useEffect(() => { window.scrollTo(0, 0) }, [pathname])
+  React.useEffect(() => window.scrollTo({ top: 0, behavior: 'smooth' }), [pathname])
   return null
 }
 
@@ -19,11 +19,12 @@ export default function App() {
 
   React.useEffect(() => {
     try { localStorage.setItem('omix-theme', darkMode ? 'dark' : 'light') } catch {}
+    document.documentElement.classList.toggle('dark', darkMode)
     document.documentElement.style.colorScheme = darkMode ? 'dark' : 'light'
   }, [darkMode])
 
   return (
-    <div className={`min-h-screen flex flex-col ${darkMode ? 'theme-dark bg-[#0b0d10] text-slate-100' : 'bg-[#f7f8fa] text-slate-900'}`}>
+    <div className={`min-h-screen flex flex-col ${darkMode ? 'theme-dark' : ''}`}>
       <ScrollToTop />
       <Navbar darkMode={darkMode} onToggleTheme={() => setDarkMode(v => !v)} />
       <main className="flex-grow">
