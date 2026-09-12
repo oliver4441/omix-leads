@@ -34,7 +34,7 @@ export const articles = [
     date: '2026-08-16',
     sections: [
       ['The problem', 'Schools manage interconnected data across learners, staff, classes, timetables, finance, communication and reporting. Fragmented tools create duplicated work and inconsistent information.'],
-      ['The platform approach', 'Phikila approaches school management as one connected system, allowing operational workflows to share the same underlying data and permissions.'],
+      ['The platform approach', 'Decimal approaches school management as one connected system, allowing operational workflows to share the same underlying data and permissions.'],
       ['The goal', 'The objective is not simply to digitise forms. It is to reduce administrative friction while giving schools reliable information for daily decisions.']
     ]
   },
@@ -49,7 +49,7 @@ export const articles = [
       ['We think beyond the interface', 'A useful product is more than a polished frontend. We consider the data model, APIs, authentication, integrations, deployment and operational workflow that make the product actually work.'],
       ['Integration is part of the design', 'OMIX is built around Optimal Modular Integration Experts. External services, payments, business workflows and internal systems are treated as architecture concerns rather than last-minute add-ons.'],
       ['You get a path beyond the MVP', 'We prefer modular foundations that can be extended as requirements become clearer. The aim is to avoid rebuilding the entire system every time the business grows.'],
-      ['We build products, not just deliverables', 'Our own products such as Veyra and Phikila give us direct experience with the trade-offs involved in shipping and operating software.'],
+      ['We build products, not just deliverables', 'Our own products such as Veyra and Decimal give us direct experience with the trade-offs involved in shipping and operating software.'],
       ['A practical choice', 'OMIX is a strong fit when you need one technical partner to move from problem definition through architecture, implementation, integration and deployment.']
     ]
   },
@@ -107,7 +107,7 @@ export const articles = [
       ['The Bifrost approach', 'Bifrost is designed as a routing and orchestration layer between applications or agents and AI model providers. Instead of coupling every application directly to one model, workloads can pass through one programmable gateway.'],
       ['Why routing matters', 'Different models have different strengths, costs, latency profiles and availability. A routing layer makes it possible to choose models based on workload requirements instead of hard-coding a single provider into every application.'],
       ['Built for agents and applications', 'Bifrost is intended to fit both conventional software and AI-agent workflows. The goal is a shared infrastructure layer that can sit underneath multiple applications, agents and development environments.'],
-      ['The next layer of the OMIX ecosystem', 'Bifrost joins the OMIX product ecosystem alongside products such as Aide, Veyra, Phikila and Omni Analytics. It represents OMIX moving further into infrastructure for software teams building with AI.']
+      ['The next layer of the OMIX ecosystem', 'Bifrost joins the OMIX product ecosystem alongside products such as Aide, Veyra, Decimal and Omni Analytics. It represents OMIX moving further into infrastructure for software teams building with AI.']
     ]
   }
 ]

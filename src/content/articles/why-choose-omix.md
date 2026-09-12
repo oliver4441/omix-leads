@@ -19,7 +19,7 @@ We prefer modular foundations that can be extended as requirements become cleare
 
 ## We build products, not only deliverables
 
-Veyra and Phikila are examples of products developed within the OMIX ecosystem. Building our own products exposes us to the same product, engineering and operational trade-offs our clients face.
+Veyra and Decimal are examples of products developed within the OMIX ecosystem. Building our own products exposes us to the same product, engineering and operational trade-offs our clients face.
 
 ## When OMIX is the right fit
 
