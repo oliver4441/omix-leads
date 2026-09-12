@@ -1,0 +1,30 @@
+/* Motion layer guided by iArt web/motion skills: restrained editorial motion, accessibility first. */
+
+.journal-reveal { animation: journal-fade-up 560ms cubic-bezier(.22,1,.36,1) both; }
+.journal-reveal-delay-1 { animation-delay: 90ms; }
+.journal-reveal-delay-2 { animation-delay: 170ms; }
+.journal-reveal-delay-3 { animation-delay: 250ms; }
+
+.journal-interactive { transition: transform 220ms cubic-bezier(.22,1,.36,1), border-color 220ms ease, box-shadow 220ms ease; }
+.journal-interactive:hover { transform: translateY(-3px); }
+.journal-interactive:focus-visible,
+.journal-topic-card:focus-visible,
+.journal-row a:focus-visible,
+.journal-featured-card:focus-visible,
+.journal-aside a:focus-visible,
+.button:focus-visible { outline: 3px solid rgba(15,23,42,.24); outline-offset: 4px; }
+
+@keyframes journal-fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}
