@@ -1,0 +1,42 @@
+name: Install Blog Design Skills
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install UI/UX Pro Max
+        run: |
+          npx skills add https://github.com/nextlevelbuilder/ui-ux-pro-max-skill --skill ui-ux-pro-max --agent opencode --copy -y
+
+      - name: Install web animation skills
+        run: |
+          npx skills add https://github.com/iart-ai/web-animation-skills --agent opencode --copy -y
+
+      - name: Install motion design skills
+        run: |
+          npx skills add https://github.com/iart-ai/motion-design-skills --agent opencode --copy -y
+
+      - name: Commit installed design skills
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .opencode/skills
+          if git diff --cached --quiet; then
+            echo "Design skills already installed."
+            exit 0
+          fi
+          git commit -m "chore: add UI UX and motion design skills"
+          git push
