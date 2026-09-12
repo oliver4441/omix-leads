@@ -12,6 +12,19 @@ function ScrollToTop() {
   return null
 }
 
+function NotFound() {
+  return (
+    <section className="min-h-[60vh] grid place-items-center bg-[#f7f8fa] px-5">
+      <div className="max-w-xl text-center">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">404</p>
+        <h1 className="mt-3 text-4xl md:text-5xl font-serif font-semibold text-slate-950">Page not found</h1>
+        <p className="mt-4 text-slate-600">The page you requested does not exist or may have moved.</p>
+        <a href="/wiki" className="mt-7 inline-flex rounded-lg bg-slate-950 px-5 py-3 font-semibold text-white">Open the Knowledge Base</a>
+      </div>
+    </section>
+  )
+}
+
 export default function App() {
   const [darkMode, setDarkMode] = React.useState(() => {
     try { return localStorage.getItem('omix-theme') === 'dark' } catch { return false }
@@ -34,7 +47,7 @@ export default function App() {
           <Route path="/wiki/:slug" element={<Article />} />
           <Route path="/articles/:slug" element={<Article />} />
           <Route path="/category/:category" element={<Wiki />} />
-          <Route path="*" element={<Navigate to="/wiki" replace />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <Footer />
