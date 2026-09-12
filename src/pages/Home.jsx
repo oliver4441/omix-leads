@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ArrowUpRight, BookOpen, Code2, Cloud, ShieldCheck, Boxes, Building2 } from 'lucide-react'
 import { articles } from '../data/articles'
+import '../styles/journal-motion.css'
 
 const topics = [
   ['Engineering', Code2, 'Systems, implementation and engineering practice'],
@@ -17,16 +18,16 @@ export default function Home() {
   return <div className="page-shell journal-home">
     <section className="journal-hero">
       <div className="content-wrap journal-hero-grid">
-        <div className="journal-hero-copy">
+        <div className="journal-hero-copy journal-reveal">
           <p className="journal-kicker">OMIX JOURNAL / ENGINEERING NOTES</p>
           <h1>Build with intent.</h1>
           <p className="journal-lede">Practical notes on software, systems, products and the decisions behind them.</p>
-          <div className="hero-actions">
+          <div className="hero-actions journal-reveal journal-reveal-delay-1">
             <Link to="/wiki" className="button button-primary">Read the journal <ArrowUpRight size={16} /></Link>
             <a href="https://omixsystems.store" className="button button-secondary">OMIX Systems <ArrowUpRight size={15} /></a>
           </div>
         </div>
-        <div className="journal-hero-index" aria-label="Journal index">
+        <div className="journal-hero-index journal-reveal journal-reveal-delay-2" aria-label="Journal index">
           <div className="index-line"><span>01</span><span>Engineering</span></div>
           <div className="index-line"><span>02</span><span>Architecture</span></div>
           <div className="index-line"><span>03</span><span>Cloud</span></div>
@@ -45,7 +46,7 @@ export default function Home() {
           </div>
           <span className="journal-count">{articles.length} published notes</span>
         </div>
-        <Link to={`/wiki/${featured.slug}`} className="journal-featured-card">
+        <Link to={`/wiki/${featured.slug}`} className="journal-featured-card journal-interactive">
           <div className="journal-featured-copy">
             <div className="article-meta"><span>{featured.category}</span><span>·</span><span>{featured.readTime}</span></div>
             <h3>{featured.title}</h3>
@@ -68,7 +69,7 @@ export default function Home() {
             <Link to="/wiki" className="text-link">All notes <ArrowUpRight size={15} /></Link>
           </div>
           <div className="journal-list">
-            {latest.map((article, index) => <article key={article.slug} className="journal-row">
+            {latest.map((article, index) => <article key={article.slug} className={`journal-row journal-reveal journal-reveal-delay-${Math.min((index % 3) + 1, 3)}`}>
               <span className="journal-row-number">{String(index + 1).padStart(2, '0')}</span>
               <div>
                 <div className="article-meta"><span>{article.category}</span><span>·</span><span>{article.readTime}</span><span>·</span><span>{article.date}</span></div>
@@ -109,7 +110,7 @@ export default function Home() {
           </div>
         </div>
         <div className="journal-topic-grid">
-          {topics.map(([name, Icon, desc], index) => <Link key={name} to={`/category/${encodeURIComponent(name.toLowerCase().replace(/ /g, '-'))}`} className={`journal-topic-card topic-${index + 1}`}>
+          {topics.map(([name, Icon, desc], index) => <Link key={name} to={`/category/${encodeURIComponent(name.toLowerCase().replace(/ /g, '-'))}`} className={`journal-topic-card topic-${index + 1} journal-interactive`}>
             <span className="journal-topic-number">0{index + 1}</span>
             <Icon size={20} />
             <h3>{name}</h3>
