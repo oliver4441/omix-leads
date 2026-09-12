@@ -3,7 +3,6 @@
   <url><loc>https://blog.omixsystems.store/</loc></url>
   <url><loc>https://blog.omixsystems.store/wiki</loc></url>
   <url><loc>https://blog.omixsystems.store/category/engineering</loc></url>
-  <url><loc>https://blog.omixsystems.store/category/architecture</loc></url>
   <url><loc>https://blog.omixsystems.store/category/products</loc></url>
   <url><loc>https://blog.omixsystems.store/category/business-technology</loc></url>
   <url><loc>https://blog.omixsystems.store/category/why-omix</loc></url>
@@ -14,4 +13,5 @@
   <url><loc>https://blog.omixsystems.store/wiki/omix-vs-generic-agency</loc></url>
   <url><loc>https://blog.omixsystems.store/wiki/built-to-integrate</loc></url>
   <url><loc>https://blog.omixsystems.store/wiki/transparent-software-delivery</loc></url>
+  <url><loc>https://blog.omixsystems.store/wiki/introducing-bifrost</loc></url>
 </urlset>
