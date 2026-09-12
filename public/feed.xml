@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>OMIX Journal</title>
+    <link>https://blog.omixsystems.store/</link>
+    <description>Engineering, architecture, product and business technology notes from OMIX Digital Solutions.</description>
+    <language>en</language>
+    <lastBuildDate>Tue, 08 Sep 2026 00:00:00 GMT</lastBuildDate>
+    <item>
+      <title>Introducing Bifrost: One Gateway for AI Model Routing</title>
+      <link>https://blog.omixsystems.store/wiki/introducing-bifrost</link>
+      <guid>https://blog.omixsystems.store/wiki/introducing-bifrost</guid>
+      <pubDate>Tue, 08 Sep 2026 00:00:00 GMT</pubDate>
+      <description>Bifrost is a new OMIX product for routing AI workloads across models and providers through a unified gateway.</description>
+    </item>
+    <item>
+      <title>What We Mean by Modular Software Systems</title>
+      <link>https://blog.omixsystems.store/wiki/modular-software-systems</link>
+      <guid>https://blog.omixsystems.store/wiki/modular-software-systems</guid>
+      <pubDate>Sun, 16 Aug 2026 00:00:00 GMT</pubDate>
+      <description>Why OMIX designs software as connected modules instead of isolated features.</description>
+    </item>
+    <item>
+      <title>Building Veyra as a Product Platform</title>
+      <link>https://blog.omixsystems.store/wiki/building-veyra</link>
+      <guid>https://blog.omixsystems.store/wiki/building-veyra</guid>
+      <pubDate>Sun, 16 Aug 2026 00:00:00 GMT</pubDate>
+      <description>A product note on building a cinematic streaming experience as a scalable web platform.</description>
+    </item>
+    <item>
+      <title>Why School Management Platforms Need Better Workflows</title>
+      <link>https://blog.omixsystems.store/wiki/school-management-platforms</link>
+      <guid>https://blog.omixsystems.store/wiki/school-management-platforms</guid>
+      <pubDate>Sun, 16 Aug 2026 00:00:00 GMT</pubDate>
+      <description>A look at the workflow problem behind modern school management software.</description>
+    </item>
+  </channel>
+</rss>
