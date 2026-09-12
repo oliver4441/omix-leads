@@ -1,0 +1,27 @@
+# OMIX Journal
+
+> The OMIX Journal is the public knowledge base for OMIX Digital Solutions, covering software engineering, architecture, products, business technology and the company's approach to building integrated digital systems.
+
+## Knowledge Base
+- [Knowledge Base](https://blog.omixsystems.store/wiki): Browse the OMIX Journal knowledge base.
+- [Engineering](https://blog.omixsystems.store/category/engineering): Engineering notes on modular software and system design.
+- [Architecture](https://blog.omixsystems.store/category/architecture): Architecture and integration thinking.
+- [Products](https://blog.omixsystems.store/category/products): Product notes covering OMIX products and platforms.
+- [Business Technology](https://blog.omixsystems.store/category/business-technology): Practical technology and workflow guidance for businesses.
+- [Why OMIX](https://blog.omixsystems.store/category/why-omix): Articles explaining OMIX's delivery and engineering approach.
+
+## Featured Articles
+- [What We Mean by Modular Software Systems](https://blog.omixsystems.store/wiki/modular-software-systems): OMIX's approach to modular software and integration-first architecture.
+- [Building Veyra as a Product Platform](https://blog.omixsystems.store/wiki/building-veyra): Product architecture notes for Veyra.
+- [Why School Management Platforms Need Better Workflows](https://blog.omixsystems.store/wiki/school-management-platforms): Workflow and platform thinking for school management software.
+- [Introducing Bifrost: One Gateway for AI Model Routing](https://blog.omixsystems.store/wiki/introducing-bifrost): An introduction to Bifrost and AI model routing infrastructure.
+- [Why Choose OMIX for Your Digital Product?](https://blog.omixsystems.store/wiki/why-choose-omix): OMIX's product engineering and integration approach.
+
+## Company
+- [OMIX Systems](https://omixsystems.store): Main OMIX Digital Solutions website.
+- [Decimal](https://decimal.omixsystems.store): OMIX school management product.
+- [Bifrost](https://bifrost.omixsystems.store): OMIX AI model routing product.
+
+## Optional
+- [Sitemap](https://blog.omixsystems.store/sitemap.xml): Exhaustive index of public Journal URLs.
+- [RSS Feed](https://blog.omixsystems.store/feed.xml): Machine-readable feed of Journal articles.
