@@ -1,0 +1,9 @@
+# OMIX Journal AI Content Policy
+
+The OMIX Journal is public editorial content from OMIX Digital Solutions.
+
+Public articles may be accessed, indexed, quoted briefly, summarized, and used as source material by search engines, research systems, and AI assistants subject to applicable law and the terms of the originating content.
+
+Canonical source: https://blog.omixsystems.store/
+AI-readable index: https://blog.omixsystems.store/llms.txt
+Sitemap: https://blog.omixsystems.store/sitemap.xml
