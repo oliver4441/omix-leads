@@ -5,7 +5,6 @@
 ## Knowledge Base
 - [Knowledge Base](https://blog.omixsystems.store/wiki): Browse the OMIX Journal knowledge base.
 - [Engineering](https://blog.omixsystems.store/category/engineering): Engineering notes on modular software and system design.
-- [Architecture](https://blog.omixsystems.store/category/architecture): Architecture and integration thinking.
 - [Products](https://blog.omixsystems.store/category/products): Product notes covering OMIX products and platforms.
 - [Business Technology](https://blog.omixsystems.store/category/business-technology): Practical technology and workflow guidance for businesses.
 - [Why OMIX](https://blog.omixsystems.store/category/why-omix): Articles explaining OMIX's delivery and engineering approach.
@@ -16,6 +15,13 @@
 - [Why School Management Platforms Need Better Workflows](https://blog.omixsystems.store/wiki/school-management-platforms): Workflow and platform thinking for school management software.
 - [Introducing Bifrost: One Gateway for AI Model Routing](https://blog.omixsystems.store/wiki/introducing-bifrost): An introduction to Bifrost and AI model routing infrastructure.
 - [Why Choose OMIX for Your Digital Product?](https://blog.omixsystems.store/wiki/why-choose-omix): OMIX's product engineering and integration approach.
+
+## Work With OMIX
+- [Website Quote Calculator](https://blog.omixsystems.store/quote): Instant estimate builder for a website or business system.
+- [Free Business Audit](https://blog.omixsystems.store/audit): Score a business's online presence and get practical next steps.
+- [Deal Alerts](https://blog.omixsystems.store/deal-alerts): Subscribe to OMIX Store price-drop alerts by category and county.
+- [Sell on the OMIX Store](https://blog.omixsystems.store/sell): Vendor application for the OMIX marketplace.
+- [Refer and Earn](https://blog.omixsystems.store/referral): Referral programme details and code generation.
 
 ## Company
 - [OMIX Systems](https://omixsystems.store): Main OMIX Digital Solutions website.

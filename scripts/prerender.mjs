@@ -13,6 +13,9 @@ import { dirname, resolve } from 'node:path'
 import { mkdir, readFile, writeFile, rm } from 'node:fs/promises'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
+/* Same canonical origin as the metadata module uses — imported rather than
+   duplicated so a domain move cannot desync the sitemap and the share cards. */
+const { SITE_URL } = await import(pathToFileURL(resolve(root, 'src/lib/seo.js')).href)
 const dist = resolve(root, 'dist')
 const ssrOutDir = resolve(root, '.prerender')
 
@@ -43,10 +46,27 @@ function headTags(meta) {
     `<meta property="og:description" content="${esc(meta.description)}" />`,
     `<meta property="og:url" content="${esc(meta.url)}" />`,
     `<meta property="og:site_name" content="OMIX Journal" />`,
-    `<meta name="twitter:card" content="summary" />`,
     `<meta name="twitter:title" content="${esc(meta.title)}" />`,
     `<meta name="twitter:description" content="${esc(meta.description)}" />`,
   ]
+
+  // Share cards. Absolute URLs are required: crawlers do not resolve relative
+  // og:image values, and the card silently disappears when they cannot.
+  if (meta.image) {
+    const image = meta.image.startsWith('http') ? meta.image : `${SITE_URL}${meta.image}`
+    tags.push(`<meta name="twitter:card" content="summary_large_image" />`)
+    tags.push(`<meta property="og:image" content="${esc(image)}" />`)
+    tags.push(`<meta property="og:image:type" content="image/png" />`)
+    tags.push(`<meta property="og:image:width" content="1200" />`)
+    tags.push(`<meta property="og:image:height" content="630" />`)
+    tags.push(`<meta name="twitter:image" content="${esc(image)}" />`)
+    if (meta.imageAlt) {
+      tags.push(`<meta property="og:image:alt" content="${esc(meta.imageAlt)}" />`)
+      tags.push(`<meta name="twitter:image:alt" content="${esc(meta.imageAlt)}" />`)
+    }
+  } else {
+    tags.push(`<meta name="twitter:card" content="summary" />`)
+  }
   if (meta.publishedTime) {
     tags.push(`<meta property="article:published_time" content="${esc(meta.publishedTime)}" />`)
     tags.push(`<meta property="article:section" content="${esc(meta.section)}" />`)

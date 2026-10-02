@@ -2,15 +2,50 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/omix-logo.svg" />
-    <meta name="theme-color" content="#05070b" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>OMIX Journal — Engineering, Architecture &amp; Product Notes</title>
+    <meta
+      name="description"
+      content="The OMIX Journal is a knowledge base covering software engineering, architecture, cloud systems, product development and business technology."
+    />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="OMIX Systems" />
     <link rel="canonical" href="https://blog.omixsystems.store/" />
-    <title>OMIX Journal — Engineering, Architecture & Product Notes</title>
-    <meta name="description" content="The OMIX Journal is a knowledge base covering software engineering, architecture, cloud systems, product development and business technology." />
+
+    <!-- PWA ---------------------------------------------------------------- -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#fdfbf7" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="application-name" content="OMIX Journal" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="OMIX Journal" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+    <!-- Icons -------------------------------------------------------------- -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <!--
+      Theme bootstrap, before first paint.
+      The in-app toggle is authoritative, so it has to be read before the shell
+      renders — otherwise a dark-mode reader sees a flash of paper on every
+      launch, and the installed app's status bar keeps the wrong colour.
+    -->
+    <script>
+      (function () {
+        try {
+          var dark = localStorage.getItem('omix-theme') === 'dark'
+          var root = document.documentElement
+          root.classList.toggle('theme-dark', dark)
+          root.style.colorScheme = dark ? 'dark' : 'light'
+          var meta = document.querySelector('meta[name="theme-color"]')
+          if (meta) meta.setAttribute('content', dark ? '#1b1c1a' : '#fdfbf7')
+        } catch (e) {}
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>

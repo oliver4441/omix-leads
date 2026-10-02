@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Lock, Loader2, Eye, EyeOff, BarChart3 } from 'lucide-react'
 import { supabase } from '../lib/supabase'
+import { CornerMarks } from '../components/Doodles'
 
 export default function AdminLogin() {
   const [email, setEmail] = useState('')
@@ -34,49 +35,58 @@ export default function AdminLogin() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-900 flex items-center justify-center px-4">
-      <div className="w-full max-w-sm animate-fade-in">
-        <div className="text-center mb-8">
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand to-brand-dark flex items-center justify-center mx-auto mb-4 shadow-lg shadow-brand/20">
-            <BarChart3 size={28} className="text-white" />
+    <div className="hand-page grid min-h-[80vh] place-items-center px-5 py-16">
+      <div className="narrow-narrow w-full">
+        <div className="card card-pad relative">
+          <CornerMarks />
+          <div className="text-center">
+            <span className="topic-icon mx-auto" aria-hidden="true"><BarChart3 size={22} /></span>
+            <h1 className="hand-h2 mt-5">Admin login</h1>
+            <p className="ink-soft mt-3">Sign in with your authorised Supabase account.</p>
           </div>
-          <h1 className="text-2xl font-bold text-white mb-1">Admin Login</h1>
-          <p className="text-zinc-400 text-sm">Sign in with your authorized Supabase account</p>
-        </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email address"
-            required
-            autoComplete="email"
-            autoFocus
-            className="w-full bg-zinc-800/50 border border-zinc-700 rounded-xl px-4 py-3.5 text-white placeholder-zinc-500 focus:ring-2 focus:ring-brand/50 focus:border-brand outline-none transition-all text-sm"
-          />
-          <div className="relative">
-            <Lock size={17} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" />
+          <form onSubmit={handleSubmit} className="mt-8">
+            <label className="field-label" htmlFor="admin-email">Email</label>
             <input
-              type={showPassword ? 'text' : 'password'}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
+              id="admin-email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
-              autoComplete="current-password"
-              className="w-full bg-zinc-800/50 border border-zinc-700 rounded-xl px-11 py-3.5 pr-12 text-white placeholder-zinc-500 focus:ring-2 focus:ring-brand/50 focus:border-brand outline-none transition-all text-sm"
+              autoComplete="email"
+              autoFocus
+              className="field"
             />
-            <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-300 transition-colors" aria-label={showPassword ? 'Hide password' : 'Show password'}>
-              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+
+            <label className="field-label mt-5" htmlFor="admin-password">Password</label>
+            <div className="relative">
+              <Lock size={17} aria-hidden="true" className="absolute left-4 top-1/2 -translate-y-1/2 muted" />
+              <input
+                id="admin-password"
+                type={showPassword ? 'text' : 'password'}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                autoComplete="current-password"
+                className="field pl-11 pr-14"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 muted"
+                aria-label={showPassword ? 'Hide password' : 'Show password'}
+              >
+                {showPassword ? <EyeOff size={19} aria-hidden="true" /> : <Eye size={19} aria-hidden="true" />}
+              </button>
+            </div>
+
+            {error && <p className="notice-error" role="alert">{error}</p>}
+
+            <button type="submit" disabled={loading} className="btn btn-lg mt-7 w-full">
+              {loading ? <><Loader2 size={19} className="animate-spin" aria-hidden="true" /> Signing in…</> : 'Sign in'}
             </button>
-          </div>
-
-          {error && <p className="text-red-400 text-sm bg-red-500/10 p-3 rounded-xl">{error}</p>}
-
-          <button type="submit" disabled={loading} className="w-full bg-brand text-white font-semibold py-3.5 rounded-xl hover:bg-brand-dark active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center gap-2 shadow-lg shadow-brand/20">
-            {loading ? <><Loader2 size={18} className="animate-spin" /> Signing in...</> : 'Sign in'}
-          </button>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   )
