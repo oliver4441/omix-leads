@@ -1,7 +1,9 @@
 import { useState, useMemo } from 'react';
-import { CheckCircle, Loader2, Calculator } from 'lucide-react';
+import { CheckCircle, Loader2, Calculator, ArrowUpRight } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { WEBSITE_FEATURES, KENYAN_COUNTIES, BUSINESS_INDUSTRIES, formatKES } from '../lib/constants';
+import { CornerMarks, Starburst } from '../components/Doodles';
+import '../styles/journal-motion.css';
 
 const initialContact = {
   name: '',
@@ -71,154 +73,163 @@ export default function QuoteCalculator() {
 
   if (result) {
     return (
-      <div className="min-h-screen bg-warm py-16 animate-fade-in">
-        <div className="max-w-2xl mx-auto px-4">
-          <div className="bg-white rounded-2xl shadow-lg border border-zinc-100 p-8 md:p-10">
-            <div className="text-center mb-8">
-              <div className="w-16 h-16 rounded-full bg-green-50 text-green-500 flex items-center justify-center mx-auto mb-4">
-                <CheckCircle size={36} />
+      <div className="hand-page">
+        <section className="hand-section content-wrap">
+          <div className="narrow-column">
+            <div className="card card-pad relative reveal">
+              <CornerMarks />
+              <div className="text-center">
+                <span className="stat-blob mx-auto mark-accent">
+                  <CheckCircle size={34} aria-hidden="true" />
+                </span>
+                <h1 className="hand-h2 mt-6">Your quote is ready</h1>
+                <p className="hand-lead mt-4">
+                  Here is the estimated cost, item by item. We will be in touch within 24 hours to talk it through.
+                </p>
               </div>
-              <h2 className="text-2xl font-bold text-zinc-900 mb-2">Your Quote is Ready!</h2>
-              <p className="text-zinc-500">Here's your estimated website cost breakdown.</p>
-            </div>
 
-            <div className="space-y-3 mb-6">
-              {result.features.map((f) => (
-                <div key={f.id} className="flex justify-between items-center py-2.5 border-b border-zinc-100">
-                  <span className="text-zinc-700">{f.label}</span>
-                  <span className="font-semibold text-zinc-900">{formatKES(f.price)}</span>
-                </div>
-              ))}
-            </div>
+              <ul className="quote-lines">
+                {result.features.map((f) => (
+                  <li key={f.id}>
+                    <span>{f.label}</span>
+                    <span>{formatKES(f.price)}</span>
+                  </li>
+                ))}
+              </ul>
 
-            <div className="flex justify-between items-center pt-4 border-t-2 border-brand/30">
-              <span className="text-lg font-bold text-zinc-900">Estimated Total</span>
-              <span className="text-2xl font-bold text-brand">{formatKES(result.total)}</span>
-            </div>
+              <div className="quote-total">
+                <span>Estimated total</span>
+                <strong>{formatKES(result.total)}</strong>
+              </div>
 
-            <p className="text-sm text-zinc-400 mt-8 text-center">
-              We'll reach out within 24 hours to discuss your project in detail.
-            </p>
+              <p className="muted mt-8 text-center text-[16px]">
+                This is a working estimate, not a final invoice — scope changes get priced openly before we build.
+              </p>
+
+              <div className="mt-8 flex flex-wrap justify-center gap-3">
+                <a href="https://omixsystems.store/#contact" className="btn" target="_blank" rel="noreferrer">
+                  Discuss the project <ArrowUpRight size={17} aria-hidden="true" />
+                </a>
+                <button type="button" className="btn btn-secondary" onClick={() => { setResult(null); setSelected([]); setContact(initialContact); }}>
+                  Price another project
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
+        </section>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-warm py-16 md:py-20 animate-fade-in">
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="text-center mb-12">
-          <div className="w-14 h-14 rounded-xl bg-brand-bg text-brand flex items-center justify-center mx-auto mb-4 shadow-sm animate-scale-in">
-            <Calculator size={26} />
-          </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-zinc-900 mb-2">Website Quote Calculator</h1>
-          <p className="text-zinc-500 max-w-md mx-auto">Pick the features you need and get an instant price estimate.</p>
+    <div className="hand-page">
+      <header className="page-hero">
+        <div className="content-wrap">
+          <span className="sticky-tag">
+            <Calculator size={15} aria-hidden="true" style={{ display: 'inline', verticalAlign: '-2px' }} /> Instant estimate
+          </span>
+          <h1 className="hand-h1 mt-6">Website quote calculator</h1>
+          <p className="hand-lead mt-5 max-w-[58ch]">
+            Pick the features you need and watch the number build up. No email gate, no sales call required.
+          </p>
+        </div>
+      </header>
+
+      <form onSubmit={handleSubmit} className="content-wrap hand-section quote-layout">
+        <div className="card card-pad">
+          <h2 className="hand-h3 flex items-center gap-3">
+            <span className="step-chip">1</span> What do you need?
+          </h2>
+          <p className="ink-soft mt-3">
+            Tap everything that applies. Prices are real starting points, not teasers.
+          </p>
+
+          <fieldset className="feature-picks">
+            <legend className="sr-only">Website features</legend>
+            {WEBSITE_FEATURES.map((feature) => {
+              const isActive = selected.includes(feature.id);
+              return (
+                <button
+                  key={feature.id}
+                  type="button"
+                  aria-pressed={isActive}
+                  onClick={() => toggle(feature.id)}
+                  className="feature-pick"
+                >
+                  <span className="feature-pick-label">
+                    <CheckCircle size={17} aria-hidden="true" />
+                    {feature.label}
+                  </span>
+                  <span className="feature-pick-price">{formatKES(feature.price)}</span>
+                </button>
+              );
+            })}
+          </fieldset>
         </div>
 
-        <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Left: Features */}
-          <div className="bg-white rounded-2xl shadow-sm border border-zinc-100 p-6 md:p-8">
-            <h2 className="text-lg font-semibold text-zinc-900 mb-5 flex items-center gap-2">
-              <span className="w-6 h-6 rounded bg-brand-bg text-brand flex items-center justify-center text-xs font-bold">1</span>
-              Select Features
-            </h2>
-            <div className="space-y-2.5">
-              {WEBSITE_FEATURES.map((feature) => {
-                const isActive = selected.includes(feature.id);
-                return (
-                  <button
-                    key={feature.id}
-                    type="button"
-                    onClick={() => toggle(feature.id)}
-                    className={`w-full flex items-center justify-between p-3.5 rounded-xl border-2 transition-all text-left ${
-                      isActive ? 'border-brand bg-brand-bg' : 'border-zinc-100 hover:border-zinc-200 bg-white'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all ${
-                        isActive ? 'border-brand bg-brand' : 'border-zinc-300'
-                      }`}>
-                        {isActive && <CheckCircle size={11} className="text-white" />}
-                      </div>
-                      <span className={`text-sm font-medium ${isActive ? 'text-brand-dark' : 'text-zinc-900'}`}>{feature.label}</span>
-                    </div>
-                    <span className={`text-sm font-semibold ${isActive ? 'text-brand' : 'text-zinc-400'}`}>{formatKES(feature.price)}</span>
-                  </button>
-                );
-              })}
-            </div>
+        <div className="quote-side">
+          <div className="quote-running" aria-live="polite">
+            <span className="kicker">Estimated total</span>
+            <strong>{formatKES(total)}</strong>
+            <p className="muted">
+              {selected.length} feature{selected.length === 1 ? '' : 's'} selected
+            </p>
+            <Starburst className="quote-running-mark hidden md:block" aria-hidden="true" />
           </div>
 
-          {/* Right: Contact + Total */}
-          <div className="space-y-6">
-            {/* Total Display */}
-            <div className="bg-gradient-to-br from-brand to-brand-dark text-white rounded-2xl p-6 text-center card-hover">
-              <p className="text-sm text-white/80 mb-1">Estimated Total</p>
-              <p className="text-4xl font-extrabold">{formatKES(total)}</p>
-              <p className="text-sm text-white/70 mt-1">{selected.length} feature{selected.length !== 1 ? 's' : ''} selected</p>
-            </div>
+          <div className="card card-pad">
+            <h2 className="hand-h3 flex items-center gap-3">
+              <span className="step-chip">2</span> Where do we send it?
+            </h2>
 
-            {/* Details Form */}
-            <div className="bg-white rounded-2xl shadow-sm border border-zinc-100 p-6 md:p-8 space-y-4">
-              <h2 className="text-lg font-semibold text-zinc-900 mb-3 flex items-center gap-2">
-                <span className="w-6 h-6 rounded bg-brand-bg text-brand flex items-center justify-center text-xs font-bold">2</span>
-                Your Details
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-zinc-700 mb-1.5">Full Name *</label>
-                  <input name="name" required value={contact.name} onChange={handleChange}
-                    className="w-full border border-zinc-200 rounded-xl px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-brand/30 focus:border-brand outline-none transition-all" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-zinc-700 mb-1.5">Phone *</label>
-                  <input name="phone" type="tel" required value={contact.phone} onChange={handleChange}
-                    className="w-full border border-zinc-200 rounded-xl px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-brand/30 focus:border-brand outline-none transition-all" />
-                </div>
+            <div className="field-grid mt-6">
+              <div>
+                <label className="field-label" htmlFor="q-name">Full name *</label>
+                <input id="q-name" name="name" required value={contact.name} onChange={handleChange} className="field" autoComplete="name" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-zinc-700 mb-1.5">Email *</label>
-                <input name="email" type="email" required value={contact.email} onChange={handleChange}
-                  className="w-full border border-zinc-200 rounded-xl px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-brand/30 focus:border-brand outline-none transition-all" />
+                <label className="field-label" htmlFor="q-phone">Phone *</label>
+                <input id="q-phone" name="phone" type="tel" required value={contact.phone} onChange={handleChange} className="field" autoComplete="tel" />
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-zinc-700 mb-1.5">County</label>
-                  <select name="county" value={contact.county} onChange={handleChange}
-                    className="w-full border border-zinc-200 rounded-xl px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-brand/30 focus:border-brand outline-none transition-all bg-white">
-                    <option value="">Select county</option>
-                    {KENYAN_COUNTIES.map((c) => <option key={c} value={c}>{c}</option>)}
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-zinc-700 mb-1.5">Industry</label>
-                  <select name="industry" value={contact.industry} onChange={handleChange}
-                    className="w-full border border-zinc-200 rounded-xl px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-brand/30 focus:border-brand outline-none transition-all bg-white">
-                    <option value="">Select industry</option>
-                    {BUSINESS_INDUSTRIES.map((i) => <option key={i} value={i}>{i}</option>)}
-                  </select>
-                </div>
+              <div className="field-span-2">
+                <label className="field-label" htmlFor="q-email">Email *</label>
+                <input id="q-email" name="email" type="email" required value={contact.email} onChange={handleChange} className="field" autoComplete="email" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-zinc-700 mb-1.5">Budget Range</label>
-                <select name="budget_range" value={contact.budget_range} onChange={handleChange}
-                  className="w-full border border-zinc-200 rounded-xl px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-brand/30 focus:border-brand outline-none transition-all bg-white">
+                <label className="field-label" htmlFor="q-county">County</label>
+                <select id="q-county" name="county" value={contact.county} onChange={handleChange} className="field">
+                  <option value="">Select county</option>
+                  {KENYAN_COUNTIES.map((c) => <option key={c} value={c}>{c}</option>)}
+                </select>
+              </div>
+              <div>
+                <label className="field-label" htmlFor="q-industry">Industry</label>
+                <select id="q-industry" name="industry" value={contact.industry} onChange={handleChange} className="field">
+                  <option value="">Select industry</option>
+                  {BUSINESS_INDUSTRIES.map((i) => <option key={i} value={i}>{i}</option>)}
+                </select>
+              </div>
+              <div className="field-span-2">
+                <label className="field-label" htmlFor="q-budget">Budget range</label>
+                <select id="q-budget" name="budget_range" value={contact.budget_range} onChange={handleChange} className="field">
                   <option value="">Select budget</option>
                   {budgetRanges.map((b) => <option key={b} value={b}>{b}</option>)}
                 </select>
               </div>
-
-              {error && <p className="text-red-500 text-sm bg-red-50 p-3 rounded-xl">{error}</p>}
-
-              <button type="submit" disabled={loading}
-                className="w-full bg-brand text-white font-semibold py-3 rounded-xl hover:bg-brand-dark active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center gap-2 shadow-sm hover:shadow-md">
-                {loading ? <><Loader2 size={18} className="animate-spin" /> Submitting...</> : 'Get My Quote'}
-              </button>
             </div>
+
+            {error && <p className="notice-error" role="alert">{error}</p>}
+
+            <button type="submit" disabled={loading} className="btn btn-lg mt-6 w-full">
+              {loading ? <><Loader2 size={19} className="animate-spin" aria-hidden="true" /> Sending…</> : 'Get my quote'}
+            </button>
+
+            <p className="muted mt-4 text-center text-[15px]">
+              We only use these details to reply about this quote.
+            </p>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   );
 }

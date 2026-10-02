@@ -24,6 +24,24 @@ export function upsertProperty(property, content) {
   node.setAttribute('content', content)
 }
 
+/**
+ * Point the share-card tags at a generated OG image. Mirrors what the
+ * prerenderer writes into the static HTML, so a client-side navigation keeps
+ * the head consistent with the route.
+ */
+export function setOgImage(path, alt) {
+  if (!path) return
+  const url = path.startsWith('http') ? path : `${SITE_URL}${path}`
+  upsertProperty('og:image', url)
+  upsertProperty('og:image:type', 'image/png')
+  upsertProperty('og:image:width', '1200')
+  upsertProperty('og:image:height', '630')
+  upsertProperty('og:image:alt', alt)
+  upsertMeta('twitter:card', 'summary_large_image')
+  upsertMeta('twitter:image', url)
+  upsertMeta('twitter:image:alt', alt)
+}
+
 export function setCanonical(url) {
   let node = document.querySelector('link[rel="canonical"]')
   if (!node) {

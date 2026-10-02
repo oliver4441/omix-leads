@@ -1,12 +1,14 @@
 import { useState } from 'react';
-import { Store, TrendingUp, ShieldCheck, CheckCircle, Loader2, ArrowRight } from 'lucide-react';
+import { Store, TrendingUp, ShieldCheck, CheckCircle, Loader2, ArrowUpRight } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { KENYAN_COUNTIES, BUSINESS_INDUSTRIES } from '../lib/constants';
+import { CornerMarks } from '../components/Doodles';
+import '../styles/journal-motion.css';
 
 const benefits = [
-  { icon: Store, title: 'Easy Setup', desc: 'List your first product in minutes — no tech skills needed.', gradient: 'from-orange-500 to-amber-500' },
-  { icon: TrendingUp, title: 'Grow Sales', desc: 'Reach thousands of buyers across all 47 counties.', gradient: 'from-green-500 to-emerald-500' },
-  { icon: ShieldCheck, title: 'Secure Payments', desc: 'M-Pesa & card payments handled securely for you.', gradient: 'from-blue-500 to-indigo-500' },
+  { icon: Store, title: 'Easy setup', desc: 'List your first product in minutes — no technical skills needed.' },
+  { icon: TrendingUp, title: 'Grow sales', desc: 'Reach buyers across all 47 counties from one shopfront.' },
+  { icon: ShieldCheck, title: 'Secure payments', desc: 'M-Pesa and card payments handled for you.' },
 ];
 
 const initialForm = {
@@ -70,99 +72,105 @@ export default function SellOnOmix() {
   };
 
   return (
-    <div className="min-h-screen bg-warm py-16 md:py-20 animate-fade-in">
-      <div className="max-w-4xl mx-auto px-4">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 text-white flex items-center justify-center mx-auto mb-4 shadow-sm animate-scale-in">
-            <Store size={26} />
-          </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-zinc-900 mb-2">Sell on Omix</h1>
-          <p className="text-zinc-500 max-w-md mx-auto">Join hundreds of Kenyan businesses selling on the Omix marketplace.</p>
+    <div className="hand-page">
+      <header className="page-hero">
+        <div className="content-wrap">
+          <span className="sticky-tag">
+            <Store size={15} aria-hidden="true" style={{ display: 'inline', verticalAlign: '-2px' }} /> OMIX Store
+          </span>
+          <h1 className="hand-h1 mt-6">Sell on the OMIX Store</h1>
+          <p className="hand-lead mt-5 max-w-[58ch]">
+            Bring your products to a marketplace where shoppers are already buying. You handle the goods;
+            we handle the shopfront and the payments.
+          </p>
         </div>
+      </header>
 
-        {/* Benefits */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12">
-          {benefits.map((b) => (
-            <div key={b.title} className="bg-white rounded-xl p-6 text-center border border-zinc-100 card-hover">
-              <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${b.gradient} flex items-center justify-center mx-auto mb-3 shadow-sm`}>
-                <b.icon className="text-white" size={22} />
-              </div>
-              <h3 className="font-semibold text-zinc-900 mb-1">{b.title}</h3>
-              <p className="text-sm text-zinc-500 leading-relaxed">{b.desc}</p>
+      <section className="hand-section content-wrap">
+        <div className="hand-grid hand-grid-3">
+          {benefits.map((b, i) => (
+            <div key={b.title} className={`card card-pad ${i === 1 ? 'card-postit tilt-n1' : 'tilt-1'}`}>
+              {i === 1 ? <span className="tack" aria-hidden="true" /> : <span className="tape" aria-hidden="true" />}
+              <span className="topic-icon" aria-hidden="true"><b.icon size={20} /></span>
+              <h2 className="hand-h3 mt-4">{b.title}</h2>
+              <p className="ink-soft mt-2.5">{b.desc}</p>
             </div>
           ))}
         </div>
 
-        {success ? (
-          <div className="bg-white rounded-2xl shadow-lg border border-zinc-100 p-8 md:p-10 text-center max-w-lg mx-auto animate-scale-in">
-            <div className="w-16 h-16 rounded-full bg-green-50 text-green-500 flex items-center justify-center mx-auto mb-4">
-              <CheckCircle size={36} />
+        <div className="mt-14 narrow-column">
+          {success ? (
+            <div className="card card-pad relative reveal">
+              <CornerMarks />
+              <span className="topic-icon" aria-hidden="true"><CheckCircle size={22} /></span>
+              <h2 className="hand-h2 mt-5">Application submitted</h2>
+              <p className="hand-lead mt-4">
+                We will review it and come back to you within 48 hours. Keep an eye on your email.
+              </p>
+              <a href="https://omixsystems.store" className="btn mt-8" target="_blank" rel="noreferrer">
+                Visit the OMIX Store <ArrowUpRight size={17} aria-hidden="true" />
+              </a>
             </div>
-            <h2 className="text-2xl font-bold text-zinc-900 mb-2">Application Submitted!</h2>
-            <p className="text-zinc-500 mb-2">We'll review your application and get back to you within 48 hours.</p>
-            <p className="text-sm text-zinc-400">Check your email for a confirmation.</p>
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-sm border border-zinc-100 p-6 md:p-8 space-y-5 max-w-lg mx-auto card-hover">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-zinc-700 mb-1.5">Business Name *</label>
-                <input name="business_name" required value={form.business_name} onChange={handleChange}
-                  className="w-full border border-zinc-200 rounded-xl px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-brand/30 focus:border-brand outline-none transition-all" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-zinc-700 mb-1.5">Owner Name *</label>
-                <input name="owner_name" required value={form.owner_name} onChange={handleChange}
-                  className="w-full border border-zinc-200 rounded-xl px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-brand/30 focus:border-brand outline-none transition-all" />
-              </div>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-zinc-700 mb-1.5">Phone *</label>
-                <input name="phone" type="tel" required value={form.phone} onChange={handleChange}
-                  className="w-full border border-zinc-200 rounded-xl px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-brand/30 focus:border-brand outline-none transition-all" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-zinc-700 mb-1.5">Email *</label>
-                <input name="email" type="email" required value={form.email} onChange={handleChange}
-                  className="w-full border border-zinc-200 rounded-xl px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-brand/30 focus:border-brand outline-none transition-all" />
-              </div>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-zinc-700 mb-1.5">County *</label>
-                <select name="county" required value={form.county} onChange={handleChange}
-                  className="w-full border border-zinc-200 rounded-xl px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-brand/30 focus:border-brand outline-none transition-all bg-white">
-                  <option value="">Select county</option>
-                  {KENYAN_COUNTIES.map((c) => <option key={c} value={c}>{c}</option>)}
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-zinc-700 mb-1.5">Industry *</label>
-                <select name="industry" required value={form.industry} onChange={handleChange}
-                  className="w-full border border-zinc-200 rounded-xl px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-brand/30 focus:border-brand outline-none transition-all bg-white">
-                  <option value="">Select industry</option>
-                  {BUSINESS_INDUSTRIES.map((i) => <option key={i} value={i}>{i}</option>)}
-                </select>
-              </div>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-zinc-700 mb-1.5">Products Description *</label>
-              <textarea name="products_description" required rows={3} value={form.products_description} onChange={handleChange}
-                placeholder="Briefly describe what you'd like to sell..."
-                className="w-full border border-zinc-200 rounded-xl px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-brand/30 focus:border-brand outline-none transition-all resize-none" />
-            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="card card-pad reveal">
+              <h2 className="hand-h3">Apply to sell</h2>
+              <p className="ink-soft mt-3">Every field below is only used to review this application.</p>
 
-            {error && <p className="text-red-500 text-sm bg-red-50 p-3 rounded-xl">{error}</p>}
+              <div className="field-grid mt-6">
+                <div>
+                  <label className="field-label" htmlFor="s-business">Business name *</label>
+                  <input id="s-business" name="business_name" required value={form.business_name} onChange={handleChange} className="field" autoComplete="organization" />
+                </div>
+                <div>
+                  <label className="field-label" htmlFor="s-owner">Owner name *</label>
+                  <input id="s-owner" name="owner_name" required value={form.owner_name} onChange={handleChange} className="field" autoComplete="name" />
+                </div>
+                <div>
+                  <label className="field-label" htmlFor="s-phone">Phone *</label>
+                  <input id="s-phone" name="phone" type="tel" required value={form.phone} onChange={handleChange} className="field" autoComplete="tel" />
+                </div>
+                <div>
+                  <label className="field-label" htmlFor="s-email">Email *</label>
+                  <input id="s-email" name="email" type="email" required value={form.email} onChange={handleChange} className="field" autoComplete="email" />
+                </div>
+                <div>
+                  <label className="field-label" htmlFor="s-county">County *</label>
+                  <select id="s-county" name="county" required value={form.county} onChange={handleChange} className="field">
+                    <option value="">Select county</option>
+                    {KENYAN_COUNTIES.map((c) => <option key={c} value={c}>{c}</option>)}
+                  </select>
+                </div>
+                <div>
+                  <label className="field-label" htmlFor="s-industry">Industry *</label>
+                  <select id="s-industry" name="industry" required value={form.industry} onChange={handleChange} className="field">
+                    <option value="">Select industry</option>
+                    {BUSINESS_INDUSTRIES.map((i) => <option key={i} value={i}>{i}</option>)}
+                  </select>
+                </div>
+                <div className="field-span-2">
+                  <label className="field-label" htmlFor="s-products">What will you sell? *</label>
+                  <textarea
+                    id="s-products"
+                    name="products_description"
+                    required
+                    rows={4}
+                    value={form.products_description}
+                    onChange={handleChange}
+                    placeholder="Briefly describe the products you would like to list…"
+                    className="field"
+                  />
+                </div>
+              </div>
 
-            <button type="submit" disabled={loading}
-              className="w-full bg-gradient-to-r from-orange-500 to-brand text-white font-semibold py-3 rounded-xl hover:from-brand hover:to-brand-dark active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center gap-2 shadow-sm hover:shadow-md">
-              {loading ? <><Loader2 size={18} className="animate-spin" /> Applying...</> : 'Apply to Sell'}
-            </button>
-          </form>
-        )}
-      </div>
+              {error && <p className="notice-error" role="alert">{error}</p>}
+
+              <button type="submit" disabled={loading} className="btn btn-lg mt-7 w-full">
+                {loading ? <><Loader2 size={19} className="animate-spin" aria-hidden="true" /> Sending application…</> : 'Apply to sell'}
+              </button>
+            </form>
+          )}
+        </div>
+      </section>
     </div>
   );
 }

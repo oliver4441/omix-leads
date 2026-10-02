@@ -1,5 +1,77 @@
+import { Link } from 'react-router-dom'
 import { ArrowUpRight } from 'lucide-react'
+import StoreBadges from './StoreBadges'
+
+const network = [
+  ['OMIX Systems', 'https://omixsystems.store'],
+  ['Gideon Langat', 'https://admin.omixsystems.store'],
+  ['Decimal', 'https://decimal.omixsystems.store'],
+  ['Bifrost', 'https://bifrost.omixsystems.store'],
+  ['Aide', 'https://aide.omixsystems.store'],
+  ['Pulse — Developer Portfolio', 'https://marvel-254.github.io/pulse/'],
+  ['ThreadMyMail — AI Email Harness', 'https://threadmymail.omixsystems.store'],
+]
+
+const tools = [
+  ['Get a quote', '/quote'],
+  ['Free business audit', '/audit'],
+  ['Deal alerts', '/deal-alerts'],
+  ['Sell on OMIX Store', '/sell'],
+  ['Refer & earn', '/referral'],
+]
 
 export default function Footer() {
-  return <footer className="bg-slate-950 text-white mt-auto"><div className="max-w-7xl mx-auto px-5 sm:px-8 py-12"><div className="grid md:grid-cols-3 gap-10"><div><div className="flex items-center gap-3 mb-4"><img src="/omix-logo.svg" alt="OMIX Systems" className="w-10 h-10 rounded-lg object-cover"/><span className="font-serif font-bold text-xl">OMIX Journal</span></div><p className="text-sm leading-6 text-slate-400 max-w-sm">A knowledge base from OMIX Digital Solutions. The Journal is part of the wider OMIX product and company network.</p></div><div><p className="text-xs uppercase tracking-[0.18em] text-slate-500 mb-4">OMIX Network</p><div className="space-y-3 text-sm"><a className="block text-slate-300 hover:text-white" href="https://omixsystems.store">OMIX Systems ↗</a><a className="block text-slate-300 hover:text-white" href="https://admin.omixsystems.store">Gideon Langat ↗</a><a className="block text-slate-300 hover:text-white" href="https://decimal.omixsystems.store">Decimal ↗</a><a className="block text-slate-300 hover:text-white" href="https://bifrost.omixsystems.store">Bifrost ↗</a><a className="block text-slate-300 hover:text-white" href="https://aide.omixsystems.store">Aide ↗</a><a className="block text-slate-300 hover:text-white" href="https://marvel-254.github.io/pulse/">Pulse — Developer Portfolio ↗</a><a className="block text-slate-300 hover:text-white" href="https://threadmymail.omixsystems.store">ThreadMyMail — AI Email Harness ↗</a></div></div><div><p className="text-xs uppercase tracking-[0.18em] text-slate-500 mb-4">Work with us</p><p className="text-sm text-slate-400 leading-6 mb-4">Need a digital product, business system or integration?</p><a className="inline-flex items-center gap-2 font-semibold" href="https://omixsystems.store/#contact">Discuss a project <ArrowUpRight size={15}/></a></div></div><div className="border-t border-slate-800 mt-10 pt-6 text-xs text-slate-500">© {new Date().getFullYear()} OMIX Digital Solutions. All rights reserved.</div></div></footer>
+  return (
+    <footer className="site-footer">
+      <div className="content-wrap">
+        <div className="footer-grid">
+          <div>
+            <div className="mb-4 flex items-center gap-3">
+              <img src="/omix-logo.svg" alt="" className="brand-logo" />
+              <span className="brand-name">OMIX Journal</span>
+            </div>
+            <p className="max-w-sm text-[17px] ink-soft">
+              A knowledge base from OMIX Digital Solutions — written notes on software, systems and the reasoning
+              behind them. Part of the wider OMIX product and company network.
+            </p>
+          </div>
+
+          <div>
+            <p className="footer-heading">OMIX Network</p>
+            <div className="footer-links">
+              {network.map(([label, href]) => (
+                <a key={href} className="strike-link" href={href} target="_blank" rel="noreferrer">
+                  {label} ↗
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <p className="footer-heading">Work with us</p>
+            <div className="footer-links">
+              {tools.map(([label, to]) => (
+                <Link key={to} className="strike-link" to={to}>
+                  {label}
+                </Link>
+              ))}
+            </div>
+            <a className="btn btn-secondary btn-sm mt-5" href="https://omixsystems.store/#contact" target="_blank" rel="noreferrer">
+              Discuss a project <ArrowUpRight size={16} aria-hidden="true" />
+            </a>
+            <StoreBadges />
+          </div>
+        </div>
+
+        <div className="footer-meta">
+          <span>© {new Date().getFullYear()} OMIX Digital Solutions. All rights reserved.</span>
+          <span className="flex flex-wrap gap-x-5 gap-y-1">
+            <Link to="/wiki" className="strike-link">Knowledge Base</Link>
+            <Link to="/admin" className="strike-link">Admin</Link>
+            <span>Sketchbook edition — hand-drawn in Nairobi</span>
+          </span>
+        </div>
+      </div>
+    </footer>
+  )
 }
