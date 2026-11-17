@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import {
-  ArrowUpRight, BookOpen, Code2, Boxes, Building2, ShieldCheck, FileText, PenLine,
+  ArrowUpRight, BookOpen, Code2, Boxes, Building2, ShieldCheck, FileText,
 } from 'lucide-react'
 import { publicArticles as articles, categories } from '../data/articles'
 import { categorySlug } from '../lib/seo'
