@@ -26,7 +26,7 @@ export default function Article() {
     const url = `${SITE_URL}/wiki/${article.slug}`
     document.title = `${article.title} — ${SITE_NAME}`
     upsertMeta('description', article.excerpt)
-    upsertMeta('robots', 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1')
+    upsertMeta('robots', article.indexable === false ? 'noindex,follow' : 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1')
     upsertProperty('og:type', 'article')
     upsertProperty('og:title', article.title)
     upsertProperty('og:description', article.excerpt)
