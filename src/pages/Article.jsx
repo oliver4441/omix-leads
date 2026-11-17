@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { ArrowLeft, ArrowRight, BookOpen, CalendarDays, Clock } from 'lucide-react'
-import { articles } from '../data/articles'
+import { articles, publicArticles } from '../data/articles'
 import { BRAND_URL, SITE_URL, SITE_NAME, categorySlug, clearJsonLd, setCanonical, setJsonLd, setOgImage, upsertMeta, upsertProperty } from '../lib/seo'
 import { UnderlineScribble, CornerMarks } from '../components/Doodles'
 import '../styles/journal-motion.css'
@@ -10,8 +10,9 @@ export default function Article() {
   const { slug } = useParams()
   const article = articles.find(a => a.slug === slug)
   const index = articles.findIndex(a => a.slug === slug)
-  const next = index >= 0 ? articles[index + 1] : null
-  const related = article ? articles.filter(a => a.slug !== article.slug && a.category === article.category).slice(0, 3) : []
+  const publicIndex = publicArticles.findIndex(a => a.slug === slug)
+  const next = publicIndex >= 0 ? publicArticles[publicIndex + 1] : null
+  const related = article ? publicArticles.filter(a => a.slug !== article.slug && a.category === article.category).slice(0, 3) : []
 
   useEffect(() => {
     if (!article) {
