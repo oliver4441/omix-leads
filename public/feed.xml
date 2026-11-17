@@ -35,6 +35,13 @@
       <description>How to model an STK Push request, customer authorization, callback processing, ledger posting and reconciliation as separate payment states.</description>
     </item>
     <item>
+      <title>Designing SMS Commerce for Feature Phones: Sessions, State Machines, and Payment Events</title>
+      <link>https://blog.omixsystems.store/wiki/sms-commerce-feature-phone-architecture</link>
+      <guid>https://blog.omixsystems.store/wiki/sms-commerce-feature-phone-architecture</guid>
+      <pubDate>Tue, 17 Nov 2026 00:00:00 GMT</pubDate>
+      <description>A reference architecture for letting customers browse a marketplace, place an order and track delivery through ordinary SMS messages.</description>
+    </item>
+    <item>
       <title>Offline-First Business Software: Local Writes, Sync Queues, and Conflict Resolution</title>
       <link>https://blog.omixsystems.store/wiki/offline-first-business-software</link>
       <guid>https://blog.omixsystems.store/wiki/offline-first-business-software</guid>
