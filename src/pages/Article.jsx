@@ -46,9 +46,9 @@ export default function Article() {
       headline: article.title,
       description: article.excerpt,
       datePublished: article.date,
-      dateModified: article.date,
+      dateModified: article.updatedAt || article.date,
       inLanguage: 'en',
-      author: { '@type': 'Organization', name: 'OMIX Systems', url: `${BRAND_URL}/` },
+      author: { '@type': 'Organization', name: article.author || 'OMIX Engineering Desk', url: `${BRAND_URL}/` },
       publisher: { '@type': 'Organization', name: 'OMIX Systems', url: `${BRAND_URL}/` },
       mainEntityOfPage: { '@type': 'WebPage', '@id': url },
       articleSection: article.category,
@@ -98,12 +98,16 @@ export default function Article() {
               {article.category}
             </Link>
             <span className="muted inline-flex items-center gap-1.5">
-              <CalendarDays size={14} aria-hidden="true" /> {article.date}
+              <CalendarDays size={14} aria-hidden="true" /> Published {article.date}
             </span>
+            {article.updatedAt && article.updatedAt !== article.date && (
+              <span className="muted">Updated {article.updatedAt}</span>
+            )}
             <span className="muted inline-flex items-center gap-1.5">
               <Clock size={14} aria-hidden="true" /> {article.readTime}
             </span>
           </div>
+          <p className="muted mt-3 text-[15px]">By {article.author || 'OMIX Editorial Desk'}</p>
           <h1 className="hand-h1 mt-5 max-w-[24ch]">{article.title}</h1>
           <UnderlineScribble className="mt-2 h-3 w-56 mark-accent" aria-hidden="true" />
           <p className="hand-lead mt-6 max-w-[62ch]">{article.excerpt}</p>
@@ -112,15 +116,40 @@ export default function Article() {
 
       <div className="content-wrap hand-section">
         <main className="reading-column">
+          <nav className="card card-pad mb-10" aria-label="On this page">
+            <p className="kicker">On this page</p>
+            <ol className="mt-3 grid gap-2 sm:grid-cols-2">
+              {article.sections.map(([heading]) => (
+                <li key={heading}><a className="wavy-link" href={`#${heading.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}>{heading}</a></li>
+              ))}
+            </ol>
+          </nav>
           {article.sections.map(([heading, body], i) => (
-            <section key={heading} className="reading-section">
+            <section key={heading} id={heading.toLowerCase().replace(/[^a-z0-9]+/g, '-')} className="reading-section scroll-mt-28">
               <span className="reading-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
               <div className="prose-hand">
                 <h2 className={i === 0 ? 'hand-h3 drop-cap' : 'hand-h3'}>{heading}</h2>
-                <p>{body}</p>
+                {Array.isArray(body) ? body.map((paragraph, paragraphIndex) => <p key={paragraphIndex}>{paragraph}</p>) : <p>{body}</p>}
               </div>
             </section>
           ))}
+
+          {article.references?.length > 0 && (
+            <section className="mt-14">
+              <hr className="rule-dashed" />
+              <div className="section-head mt-10">
+                <div>
+                  <p className="kicker">Further reading</p>
+                  <h2 className="hand-h3">Sources and references</h2>
+                </div>
+              </div>
+              <ul className="grid gap-3">
+                {article.references.map(([label, url]) => (
+                  <li key={url}><a className="wavy-link" href={url} target="_blank" rel="noopener noreferrer">{label} ↗</a></li>
+                ))}
+              </ul>
+            </section>
+          )}
 
           {related.length > 0 && (
             <section className="mt-14">
