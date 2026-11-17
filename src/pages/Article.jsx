@@ -97,6 +97,7 @@ export default function Article() {
             <Link to={`/category/${categorySlug(article.category)}`} className="chip chip-accent">
               {article.category}
             </Link>
+            {article.noteType && <span className="chip">{article.noteType}</span>}
             <span className="muted inline-flex items-center gap-1.5">
               <CalendarDays size={14} aria-hidden="true" /> Published {article.date}
             </span>
