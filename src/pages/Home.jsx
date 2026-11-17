@@ -163,7 +163,7 @@ export default function Home() {
               <span className="tack" aria-hidden="true" />
               <p className="kicker">Note from the desk</p>
               <p className="mt-3 text-[19px]">
-                Every note here is written by the people who build the systems. No ghostwriters, no filler.
+                Articles are attributed to the OMIX Engineering Desk or named contributors. See the editorial policy for how material is researched and checked.
               </p>
             </div>
 
@@ -208,7 +208,7 @@ export default function Home() {
               return (
                 <Link
                   key={name}
-                  to={`/category/${encodeURIComponent(name.toLowerCase().replace(/ /g, '-'))}`}
+                  to={`/category/${categorySlug(name)}`}
                   className={`topic-card card card-pad card-interactive ${index % 2 ? 'tilt-1' : 'tilt-n1'}`}
                 >
                   {index % 2 ? <span className="tape" aria-hidden="true" /> : <span className="tack" aria-hidden="true" />}
