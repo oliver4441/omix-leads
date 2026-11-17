@@ -34,6 +34,11 @@ https://blog.omixsystems.store/wiki/offline-first-business-software
 
 Covers workflow selection, durable local persistence, outbox synchronization, idempotent server operations, conflict resolution, server-side authorization, unreliable network behavior and rollout testing.
 
+### Designing SMS Commerce for Feature Phones: Sessions, State Machines, and Payment Events
+https://blog.omixsystems.store/wiki/sms-commerce-feature-phone-architecture
+
+A first-party architecture proposal for feature-phone shopping over SMS. It covers session state machines, command parsing, concise product search, separate order and payment records, idempotent callbacks, delivery notifications, opt-out handling, rate limits and pilot testing. It is explicitly labelled as a proposal, not a claim that an SMS commerce channel is currently live.
+
 ## Contact
 Editorial corrections and questions: omixsystems@gmail.com
 Main company website: https://omixsystems.store/
