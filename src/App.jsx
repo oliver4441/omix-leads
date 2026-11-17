@@ -13,6 +13,7 @@ import BusinessAudit from './pages/BusinessAudit'
 import DealAlerts from './pages/DealAlerts'
 import ReferralPage from './pages/ReferralPage'
 import SellOnOmix from './pages/SellOnOmix'
+import PublicationInfo from './pages/PublicationInfo'
 import { ScribbleArrow } from './components/Doodles'
 
 function ScrollToTop() {
@@ -75,6 +76,10 @@ export default function App() {
           <Route path="/deal-alerts" element={<DealAlerts />} />
           <Route path="/referral" element={<ReferralPage />} />
           <Route path="/sell" element={<SellOnOmix />} />
+          <Route path="/about" element={<PublicationInfo />} />
+          <Route path="/editorial-policy" element={<PublicationInfo />} />
+          <Route path="/privacy" element={<PublicationInfo />} />
+          <Route path="/terms" element={<PublicationInfo />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="*" element={<NotFound />} />
