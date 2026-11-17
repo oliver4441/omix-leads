@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { ArrowRight, BookOpen, ChevronRight, Building2, PenLine } from 'lucide-react'
-import { articles, categories } from '../data/articles'
+import { publicArticles as articles, categories } from '../data/articles'
 import { SITE_URL, SITE_NAME, categorySlug, setCanonical, setJsonLd, setOgImage, upsertMeta, upsertProperty } from '../lib/seo'
 import { Squiggle, CornerMarks } from '../components/Doodles'
 import '../styles/journal-motion.css'
