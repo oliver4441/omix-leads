@@ -333,6 +333,62 @@ export const articles = [
       ['Google web.dev — Offline data', 'https://web.dev/learn/pwa/offline-data/']
     ]
   }
+  ,
+  {
+    slug: 'sms-commerce-feature-phone-architecture',
+    title: 'Designing SMS Commerce for Feature Phones: Sessions, State Machines, and Payment Events',
+    category: 'Payments & Integrations',
+    excerpt: 'A reference architecture for letting customers browse a marketplace, place an order and track delivery through ordinary SMS messages.',
+    readTime: '8 min read',
+    date: '2026-11-17',
+    updatedAt: '2026-11-17',
+    author,
+    noteType: 'Architecture proposal',
+    indexable: true,
+    sections: [
+      ['Treat SMS as a constrained interface', [
+        'A feature-phone shopping flow has no persistent app screen, rich product cards or reliable data connection. Each customer action arrives as a separate message, and the reply must fit the limits and cost expectations of SMS. The interaction therefore needs to be designed as a short conversation with explicit steps, not as a web checkout copied into text messages.',
+        'A useful first version keeps the command vocabulary small: a welcome or help command, category selection, product search, item details, a buy command, confirmation, order status and an opt-out command. Every reply should tell the customer what happened and what they can do next. If a command is invalid, return a short example rather than silently dropping the message.'
+      ]],
+      ['Persist a session state machine', [
+        'SMS is stateless at the transport layer, but the shopping journey is not. The application needs to remember whether a sender is browsing categories, viewing an item, confirming an order or checking delivery. A session record can store the sender identifier, current state, a small context object, creation time and last activity time.',
+        'The state machine should define allowed transitions. For example, menu can move to browsing after a category selection; browsing can move to item_detail after a product selection; item_detail can move to confirm_order after a valid buy command. A BACK command returns to a known prior state. A HELP command explains the current state without changing it. Expired sessions should return to a safe menu rather than applying an old confirmation to a new order.',
+        'Persist the transition before sending the next SMS. If the gateway retries an inbound webhook, the same message must not advance the session twice or create duplicate orders. Store an inbound message identifier when the provider supplies one; otherwise derive a carefully scoped deduplication key from the sender, message body and provider timestamp.'
+      ]],
+      ['Separate parsing from business operations', [
+        'The inbound webhook should authenticate the gateway request, validate the sender and message fields, normalize the text, and pass a structured command to the session handler. Keep parsing separate from order creation and payment logic. This makes it possible to test commands without sending real messages or initiating real transactions.',
+        'The parser should reject ambiguous commands and validate numeric product identifiers, quantities and order references. A message such as BUY 42 QTY 2 should resolve to a product that is still available and a quantity within the business rules. Never trust a price, total or product description supplied by the handset; retrieve those values from the server-side catalogue.'
+      ]],
+      ['Keep search concise and predictable', [
+        'SMS search results need to be short. A practical design returns a small number of matches with an item number, abbreviated title and current price, then asks the customer to request details for one item. Full-text search can handle normal words while trigram similarity can help with minor spelling errors. The result limit should be small enough that the message remains readable and affordable.',
+        'The application should make it clear when a result is unavailable or when a price has changed. A product selected from an old session must be revalidated before order creation. Search ranking should be deterministic enough that a customer can refer to the displayed item number in the next message.'
+      ]],
+      ['Model the order and payment as separate steps', [
+        'An order records the items, quantity, price snapshot, delivery choice and customer intent. A payment attempt records one effort to collect the order total. These records should have separate identifiers and states. Creating an order does not mean it has been paid, and sending a payment prompt does not mean the provider has collected money.',
+        'A proposed flow is: validate the order, create it in a pending-payment state, initiate the supported payment request, and send the customer a short instruction. The system should only confirm the order after it receives and verifies an authoritative payment result. If the payment response is delayed, keep the order pending and provide a status command rather than telling the customer that payment succeeded.',
+        'Payment callbacks can be duplicated or arrive late. Store provider references, enforce uniqueness for successful transaction references, and make the order transition idempotent. Reconcile unresolved attempts through the provider’s documented status or statement mechanism. The exact M-PESA request fields, callback schema and verification process must follow the current Safaricom Daraja contract.'
+      ]],
+      ['Make delivery updates useful, not noisy', [
+        'The order status command should return only information the customer needs: a human-readable order reference, current status, and the next expected step. Delivery notifications should be sent when the state changes in a way that matters to the customer, such as confirmation, dispatch or an exception requiring action. Avoid sending repeated messages for internal status updates.',
+        'Do not expose a seller’s or rider’s private contact details unless the business process and privacy notice explicitly permit it. Use short-lived tracking links when a web view is useful, and avoid putting sensitive personal data into a URL or a message that can be seen on a shared handset.'
+      ]],
+      ['Design opt-out, rate limits and privacy from the start', [
+        'A messaging channel needs a clear opt-out path. A STOP command should be recognized even when the user is in the middle of another state, recorded against the recipient, and respected by future promotional messages. Distinguish transactional order updates from marketing messages and apply the relevant consent and regulatory requirements to each category.',
+        'Rate-limit outbound messages per sender and per workflow to prevent loops and unexpected cost. Keep message templates short, redact phone numbers in routine logs, restrict access to session and order records, and define retention for message content. A phone number is personal information; it should not be treated as a harmless session key.'
+      ]],
+      ['Test the failure paths before a pilot', [
+        'Test duplicate inbound webhooks, out-of-order messages, expired sessions, misspelled commands, unavailable products, changed prices, delayed payment callbacks, duplicate payment notifications, STOP during an active order and temporary SMS-provider outages. Include a feature-phone test because message length, encoding and handset behavior can differ from a smartphone emulator.',
+        'Measure successful command completion, abandoned sessions, invalid-command rate, message delivery failures, average messages per completed order, pending-payment age and reconciliation exceptions. These measurements help determine whether SMS reduces friction or simply moves complexity into customer support.',
+        'This article describes a reference architecture proposal being explored for the OMIX marketplace. It is not a statement that an SMS shopping channel or every workflow described here is currently live. A production release would require provider onboarding, shortcode approval where applicable, compliance review, end-to-end testing and operational support.'
+      ]]
+    ],
+    references: [
+      ['OMIX Store — SMS commerce architecture proposal', 'https://github.com/oliver4441/stor1/blob/main/docs/architecture-sms-commerce.md'],
+      ["Africa's Talking — SMS API documentation", 'https://developers.africastalking.com/docs/sms/overview'],
+      ['Safaricom Daraja Developer Portal', 'https://developer.safaricom.co.ke/'],
+      ['PostgreSQL — Full Text Search', 'https://www.postgresql.org/docs/current/textsearch.html']
+    ]
+  }
 ]
 
 export const publicArticles = articles.filter(article => article.indexable !== false)
