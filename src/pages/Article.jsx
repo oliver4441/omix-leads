@@ -9,7 +9,6 @@ import '../styles/journal-motion.css'
 export default function Article() {
   const { slug } = useParams()
   const article = articles.find(a => a.slug === slug)
-  const index = articles.findIndex(a => a.slug === slug)
   const publicIndex = publicArticles.findIndex(a => a.slug === slug)
   const next = publicIndex >= 0 ? publicArticles[publicIndex + 1] : null
   const related = article ? publicArticles.filter(a => a.slug !== article.slug && a.category === article.category).slice(0, 3) : []
