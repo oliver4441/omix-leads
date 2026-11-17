@@ -23,6 +23,8 @@ const noindex = (title, description, url) => ({
    always a crawler-resolvable URL. */
 const OG_DEFAULT = '/og/og-default.png'
 
+const RETIRED_CATEGORY_PATHS = ['/category/products', '/category/why-omix']
+
 const PUBLICATION_PAGES = {
   '/about': { title: 'About the OMIX Journal', description: 'Who publishes the OMIX Journal, what it covers, and how it relates to OMIX Digital Solutions.' },
   '/editorial-policy': { title: 'Editorial Policy — OMIX Journal', description: 'The OMIX Journal standards for authorship, research, technical verification, AI assistance, corrections and commercial transparency.' },
@@ -253,7 +255,7 @@ function publicationMeta(path) {
 }
 
 export function getPrerenderPaths() {
-  const paths = ['/', '/wiki', ...Object.keys(TOOL_PAGES), ...Object.keys(PUBLICATION_PAGES)]
+  const paths = ['/', '/wiki', ...Object.keys(TOOL_PAGES), ...Object.keys(PUBLICATION_PAGES), ...RETIRED_CATEGORY_PATHS]
   for (const c of categories) paths.push(`/category/${categorySlug(c)}`)
   for (const a of articles) paths.push(`/wiki/${a.slug}`)
   return paths
