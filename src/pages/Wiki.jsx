@@ -18,10 +18,10 @@ export default function Wiki() {
     const description = activeCategoryName
       ? `OMIX Journal articles about ${activeCategoryName.toLowerCase()}, software engineering and digital products.`
       : 'Engineering notes, product thinking, business technology and practical software architecture from OMIX.'
-    const url = activeCategoryName ? `${SITE_URL}/category/${categorySlug(activeCategoryName)}` : `${SITE_URL}/wiki`
+    const url = activeCategoryName ? `${SITE_URL}/category/${categorySlug(activeCategoryName)}` : category ? `${SITE_URL}/category/${categorySlug(category)}` : `${SITE_URL}/wiki`
     document.title = title
     upsertMeta('description', description)
-    upsertMeta('robots', 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1')
+    upsertMeta('robots', category && !activeCategoryName ? 'noindex,follow' : 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1')
     upsertProperty('og:type', 'website')
     upsertProperty('og:title', title)
     upsertProperty('og:description', description)
@@ -50,6 +50,19 @@ export default function Wiki() {
     })
     return () => document.getElementById('wiki-jsonld')?.remove()
   }, [activeCategoryName, visible])
+
+  if (category && !activeCategoryName) {
+    return (
+      <div className="hand-page grid min-h-[60vh] place-items-center px-5 py-20">
+        <div className="max-w-xl text-center">
+          <span className="sticky-tag">404 — category not found</span>
+          <h1 className="hand-h2 mt-6">This shelf is not published.</h1>
+          <p className="hand-lead mt-4">The topic may have been renamed or its articles are being revised.</p>
+          <Link to="/wiki" className="btn mt-8">Browse published articles</Link>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="hand-page">
