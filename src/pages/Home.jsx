@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom'
 import {
-  ArrowUpRight, BookOpen, Code2, Boxes, Building2, ShieldCheck,
-  Calculator, ClipboardCheck, Bell, Store, Gift,
+  ArrowUpRight, BookOpen, Code2, Boxes, Building2, ShieldCheck, FileText, PenLine,
 } from 'lucide-react'
-import { articles, categories } from '../data/articles'
-import { ScribbleArrow, Squiggle, CornerMarks, Starburst, RoughCircle } from '../components/Doodles'
+import { publicArticles as articles, categories } from '../data/articles'
+import { categorySlug } from '../lib/seo'
+import { ScribbleArrow, Squiggle, CornerMarks, Starburst } from '../components/Doodles'
 import '../styles/journal-motion.css'
 
 /* Category copy lives next to the data it describes, derived from the real
@@ -12,23 +12,10 @@ import '../styles/journal-motion.css'
 const categoryMeta = {
   Engineering: { icon: Code2, blurb: 'How systems get built, module by module.' },
   Products: { icon: Boxes, blurb: 'Field notes from shipping real products.' },
-  'Business Technology': { icon: Building2, blurb: 'Tools that change how a business runs.' },
-  'Why OMIX': { icon: ShieldCheck, blurb: 'How we work, and why it matters.' },
+  'Business Technology': { icon: Building2, blurb: 'Operational workflows, offline support and connected business data.' },
+  'AI & Automation': { icon: Boxes, blurb: 'Model gateways, agent workflows and practical automation.' },
+  'Payments & Integrations': { icon: ShieldCheck, blurb: 'Payment lifecycles, webhooks and dependable service integrations.' },
 }
-
-const tools = [
-  { to: '/quote', icon: Calculator, title: 'Quote calculator', text: 'Price a website or system feature by feature, in about two minutes.', cta: 'Build a quote', badge: 'Most used' },
-  { to: '/audit', icon: ClipboardCheck, title: 'Free business audit', text: 'Answer a short questionnaire and get a practical, no-jargon report.', cta: 'Start the audit' },
-  { to: '/deal-alerts', icon: Bell, title: 'Deal alerts', text: 'We ping you when the OMIX Store drops prices in your categories.', cta: 'Subscribe' },
-  { to: '/sell', icon: Store, title: 'Sell on OMIX Store', text: 'Put your products in front of shoppers who already buy on the platform.', cta: 'Apply to sell' },
-  { to: '/referral', icon: Gift, title: 'Refer and earn', text: 'Introduce a business that needs software and get paid for the intro.', cta: 'Get your link' },
-]
-
-const steps = [
-  ['Tell us what you need', 'A short form or a quick chat — whichever is easier.'],
-  ['Get a real number', 'A scope and a price, written down, with nothing hidden.'],
-  ['We build it', 'Modular delivery you can see, review and use as it grows.'],
-]
 
 export default function Home() {
   const latest = [...articles].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 6)
@@ -68,7 +55,7 @@ export default function Home() {
               {categories.map((name, i) => (
                 <li key={name}>
                   <span className="hero-index-num">{String(i + 1).padStart(2, '0')}</span>
-                  <Link to={`/category/${encodeURIComponent(name.toLowerCase().replace(/ /g, '-'))}`} className="wavy-link">
+                  <Link to={`/category/${categorySlug(name)}`} className="wavy-link">
                     {name}
                   </Link>
                   <span className="muted">{countFor(name)}</span>
@@ -90,8 +77,8 @@ export default function Home() {
             {[
               [articles.length, 'published notes'],
               [categories.length, 'knowledge areas'],
-              ['Sep 2026', 'latest note'],
-              ['Nairobi', 'where we build'],
+              [latest[0]?.date ? new Date(`${latest[0].date}T00:00:00`).toLocaleDateString('en', { month: 'short', year: 'numeric' }) : '—', 'latest article'],
+              ['Kericho, Kenya', 'publisher base'],
             ].map(([value, label], i) => (
               <div key={label} className={`stat-item ${i % 2 ? 'tilt-1' : 'tilt-n1'}`}>
                 <span className="stat-blob jiggle">
@@ -193,7 +180,7 @@ export default function Home() {
                 {categories.map((name) => {
                   const Icon = categoryMeta[name]?.icon || Code2
                   return (
-                    <Link key={name} to={`/category/${encodeURIComponent(name.toLowerCase().replace(/ /g, '-'))}`} className="jiggle">
+                    <Link key={name} to={`/category/${categorySlug(name)}`} className="jiggle">
                       <span className="aside-icon"><Icon size={17} aria-hidden="true" /></span>
                       {name}
                       <ArrowUpRight size={15} aria-hidden="true" />
@@ -212,7 +199,7 @@ export default function Home() {
           <div className="section-head">
             <div>
               <p className="kicker">Explore</p>
-              <h2 className="hand-h2">Four ways into the journal.</h2>
+              <h2 className="hand-h2">Browse by subject.</h2>
             </div>
           </div>
           <div className="topic-grid">
@@ -238,49 +225,29 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ----------------------------------------------------------- tools */}
-      <section id="tools" className="hand-section">
+      {/* ----------------------------------------------------- publication */}
+      <section id="standards" className="hand-section">
         <div className="content-wrap">
           <div className="section-head">
             <div>
-              <p className="kicker">Work with us</p>
-              <h2 className="hand-h2">Start with a number, not a pitch.</h2>
+              <p className="kicker">How we publish</p>
+              <h2 className="hand-h2">Useful explanations, not filler.</h2>
             </div>
+            <p className="hand-lead max-w-[42ch]">Articles should explain a real problem, show their reasoning, acknowledge limitations and point readers to sources they can verify.</p>
           </div>
-
-          <div className="tool-grid">
-            {tools.map((tool, index) => (
-              <Link key={tool.to} to={tool.to} className={`tool-card card card-pad card-interactive ${index === 0 ? 'tool-card-lead' : ''}`}>
-                {tool.badge && (
-                  <>
-                    <span className="tool-badge sticky-tag">{tool.badge}</span>
-                    <RoughCircle className="tool-badge-circle hidden md:block" aria-hidden="true" />
-                  </>
-                )}
-                <span className="topic-icon"><tool.icon size={20} aria-hidden="true" /></span>
-                <h3 className="hand-h3 mt-4">{tool.title}</h3>
-                <p className="ink-soft mt-2.5">{tool.text}</p>
-                <span className="text-link mt-5">
-                  {tool.cta} <ArrowUpRight size={16} aria-hidden="true" />
-                </span>
-              </Link>
-            ))}
-
-            <div className="tool-promise card card-pad card-tint-blue">
-              <p className="kicker">How it goes</p>
-              <ol className="tool-steps">
-                {steps.map(([title, text], i) => (
-                  <li key={title}>
-                    <span className="tool-step-num">{i + 1}</span>
-                    <div>
-                      <strong>{title}</strong>
-                      <p className="ink-soft">{text}</p>
-                    </div>
-                    {i < steps.length - 1 && <Squiggle className="tool-step-squiggle hidden md:block" />}
-                  </li>
-                ))}
-              </ol>
-            </div>
+          <div className="hand-grid hand-grid-2">
+            <Link to="/about" className="card card-pad card-interactive">
+              <span className="topic-icon"><BookOpen size={21} aria-hidden="true" /></span>
+              <h3 className="hand-h3 mt-4">About the Journal</h3>
+              <p className="ink-soft mt-2.5">Who publishes this knowledge base, what it covers and how it relates to OMIX Digital Solutions.</p>
+              <span className="text-link mt-5">Read about the publication <ArrowUpRight size={16} aria-hidden="true" /></span>
+            </Link>
+            <Link to="/editorial-policy" className="card card-pad card-interactive">
+              <span className="topic-icon"><FileText size={21} aria-hidden="true" /></span>
+              <h3 className="hand-h3 mt-4">Editorial policy</h3>
+              <p className="ink-soft mt-2.5">Our standards for research, technical verification, authorship, AI assistance, corrections and commercial transparency.</p>
+              <span className="text-link mt-5">Read our publishing standards <ArrowUpRight size={16} aria-hidden="true" /></span>
+            </Link>
           </div>
         </div>
       </section>
@@ -294,17 +261,14 @@ export default function Home() {
               <h2 className="hand-h2">The journal is where the reasoning lives.</h2>
             </div>
             <div className="flex flex-wrap gap-4">
-              <a href="https://bifrost.omixsystems.store" className="btn" target="_blank" rel="noreferrer">
-                Explore Bifrost <ArrowUpRight size={18} aria-hidden="true" />
-              </a>
-              <a href="https://omixsystems.store/#contact" className="btn btn-secondary" target="_blank" rel="noreferrer">
-                Start a conversation <ArrowUpRight size={18} aria-hidden="true" />
-              </a>
+              <Link to="/wiki" className="btn btn-secondary">
+                Browse all articles <ArrowUpRight size={18} aria-hidden="true" />
+              </Link>
             </div>
           </div>
           <hr className="rule-dashed" />
           <p className="hand-lead mt-7 max-w-[60ch]">
-            Explore the products, infrastructure and experiments that turn these ideas into working software.
+            Explore the engineering ideas, trade-offs and references behind software and digital systems.
           </p>
         </div>
       </section>
