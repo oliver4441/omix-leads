@@ -17,6 +17,7 @@
 - [Reliable Webhook Consumers](https://blog.omixsystems.store/wiki/reliable-webhook-consumers): signature verification, idempotency, durable processing, retries, event ordering and reconciliation.
 - [M-PESA STK Push Payment Lifecycle](https://blog.omixsystems.store/wiki/mpesa-stk-push-payment-lifecycle): asynchronous payment states, callback handling, ledger posting and reconciliation for Kenyan payment workflows.
 - [Offline-First Business Software](https://blog.omixsystems.store/wiki/offline-first-business-software): local persistence, outbox synchronization, conflict resolution and device security.
+- [SMS Commerce Architecture Proposal](https://blog.omixsystems.store/wiki/sms-commerce-feature-phone-architecture): feature-phone shopping sessions, command routing, order/payment states, opt-out and delivery updates.
 
 ## Publisher
 - [OMIX Digital Solutions](https://omixsystems.store): the company that publishes the Journal.
