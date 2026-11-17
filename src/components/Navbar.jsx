@@ -1,12 +1,12 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { Menu, X, ExternalLink, Sun, Moon, PenLine } from 'lucide-react'
+import { Menu, X, ExternalLink, Sun, Moon, BookOpen } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 const links = [
   { to: '/wiki', label: 'Knowledge Base' },
   { to: '/#latest', label: 'Latest' },
   { to: '/#topics', label: 'Topics' },
-  { to: '/#tools', label: 'Work with us' },
+  { to: '/about', label: 'About' },
 ]
 
 export default function Navbar({ darkMode, onToggleTheme }) {
@@ -68,8 +68,8 @@ export default function Navbar({ darkMode, onToggleTheme }) {
           >
             {darkMode ? <Sun size={19} /> : <Moon size={19} />}
           </button>
-          <Link to="/quote" className="btn btn-accent btn-sm">
-            <PenLine size={17} aria-hidden="true" /> Get a quote
+          <Link to="/editorial-policy" className="btn btn-accent btn-sm">
+            <BookOpen size={17} aria-hidden="true" /> Editorial policy
           </Link>
         </div>
 
@@ -100,8 +100,9 @@ export default function Navbar({ darkMode, onToggleTheme }) {
               {l.label}
             </Link>
           ))}
-          <Link to="/quote">Get a quote</Link>
-          <Link to="/audit">Free business audit</Link>
+          <Link to="/about">About the Journal</Link>
+          <Link to="/editorial-policy">Editorial policy</Link>
+          <Link to="/privacy">Privacy</Link>
           <a href="https://omixsystems.store" target="_blank" rel="noreferrer">
             OMIX Systems <ExternalLink size={16} aria-hidden="true" />
           </a>

@@ -1,24 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ArrowUpRight } from 'lucide-react'
-import StoreBadges from './StoreBadges'
-
-const network = [
-  ['OMIX Systems', 'https://omixsystems.store'],
-  ['Gideon Langat', 'https://admin.omixsystems.store'],
-  ['Decimal', 'https://decimal.omixsystems.store'],
-  ['Bifrost', 'https://bifrost.omixsystems.store'],
-  ['Aide', 'https://aide.omixsystems.store'],
-  ['Pulse — Developer Portfolio', 'https://marvel-254.github.io/pulse/'],
-  ['ThreadMyMail — AI Email Harness', 'https://threadmymail.omixsystems.store'],
-]
-
-const tools = [
-  ['Get a quote', '/quote'],
-  ['Free business audit', '/audit'],
-  ['Deal alerts', '/deal-alerts'],
-  ['Sell on OMIX Store', '/sell'],
-  ['Refer & earn', '/referral'],
-]
+import { categories } from '../data/articles'
+import { categorySlug } from '../lib/seo'
 
 export default function Footer() {
   return (
@@ -31,44 +14,44 @@ export default function Footer() {
               <span className="brand-name">OMIX Journal</span>
             </div>
             <p className="max-w-sm text-[17px] ink-soft">
-              A knowledge base from OMIX Digital Solutions — written notes on software, systems and the reasoning
-              behind them. Part of the wider OMIX product and company network.
+              A technical publication by OMIX Digital Solutions, covering software engineering, architecture,
+              AI infrastructure, payments and business technology.
             </p>
+            <a className="btn btn-secondary btn-sm mt-5" href="https://omixsystems.store/" target="_blank" rel="noreferrer">
+              OMIX Digital Solutions <ArrowUpRight size={16} aria-hidden="true" />
+            </a>
           </div>
 
           <div>
-            <p className="footer-heading">OMIX Network</p>
+            <p className="footer-heading">Browse topics</p>
             <div className="footer-links">
-              {network.map(([label, href]) => (
-                <a key={href} className="strike-link" href={href} target="_blank" rel="noreferrer">
-                  {label} ↗
-                </a>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <p className="footer-heading">Work with us</p>
-            <div className="footer-links">
-              {tools.map(([label, to]) => (
-                <Link key={to} className="strike-link" to={to}>
-                  {label}
+              {categories.map((category) => (
+                <Link key={category} className="strike-link" to={`/category/${categorySlug(category)}`}>
+                  {category}
                 </Link>
               ))}
             </div>
-            <a className="btn btn-secondary btn-sm mt-5" href="https://omixsystems.store/#contact" target="_blank" rel="noreferrer">
-              Discuss a project <ArrowUpRight size={16} aria-hidden="true" />
-            </a>
-            <StoreBadges />
+          </div>
+
+          <div>
+            <p className="footer-heading">Publication</p>
+            <div className="footer-links">
+              <Link className="strike-link" to="/wiki">All articles</Link>
+              <Link className="strike-link" to="/about">About the Journal</Link>
+              <Link className="strike-link" to="/editorial-policy">Editorial policy</Link>
+              <Link className="strike-link" to="/privacy">Privacy policy</Link>
+              <Link className="strike-link" to="/terms">Terms of use</Link>
+              <a className="strike-link" href="mailto:omixsystems@gmail.com">Contact the editors</a>
+            </div>
           </div>
         </div>
 
         <div className="footer-meta">
-          <span>© {new Date().getFullYear()} OMIX Digital Solutions. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} OMIX Digital Solutions. OMIX Journal is a company publication.</span>
           <span className="flex flex-wrap gap-x-5 gap-y-1">
-            <Link to="/wiki" className="strike-link">Knowledge Base</Link>
-            <Link to="/admin" className="strike-link">Admin</Link>
-            <span>Sketchbook edition — hand-drawn in Nairobi</span>
+            <Link to="/about" className="strike-link">About</Link>
+            <Link to="/editorial-policy" className="strike-link">Publishing standards</Link>
+            <Link to="/privacy" className="strike-link">Privacy</Link>
           </span>
         </div>
       </div>

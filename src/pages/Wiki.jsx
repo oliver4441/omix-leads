@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { ArrowRight, BookOpen, ChevronRight, Building2, PenLine } from 'lucide-react'
-import { articles, categories } from '../data/articles'
+import { ArrowRight, BookOpen, ChevronRight, PenLine } from 'lucide-react'
+import { publicArticles as articles, categories } from '../data/articles'
 import { SITE_URL, SITE_NAME, categorySlug, setCanonical, setJsonLd, setOgImage, upsertMeta, upsertProperty } from '../lib/seo'
 import { Squiggle, CornerMarks } from '../components/Doodles'
 import '../styles/journal-motion.css'
@@ -11,17 +11,16 @@ export default function Wiki() {
   const activeCategory = category ? decodeURIComponent(category) : null
   const activeCategoryName = activeCategory ? categories.find(c => categorySlug(c) === categorySlug(activeCategory)) : null
   const visible = activeCategoryName ? articles.filter(a => a.category === activeCategoryName) : articles
-  const whyArticles = articles.filter(a => a.category === 'Why OMIX')
 
   useEffect(() => {
     const title = activeCategoryName ? `${activeCategoryName} — ${SITE_NAME}` : `Knowledge Base — ${SITE_NAME}`
     const description = activeCategoryName
       ? `OMIX Journal articles about ${activeCategoryName.toLowerCase()}, software engineering and digital products.`
       : 'Engineering notes, product thinking, business technology and practical software architecture from OMIX.'
-    const url = activeCategoryName ? `${SITE_URL}/category/${categorySlug(activeCategoryName)}` : `${SITE_URL}/wiki`
+    const url = activeCategoryName ? `${SITE_URL}/category/${categorySlug(activeCategoryName)}` : category ? `${SITE_URL}/category/${categorySlug(category)}` : `${SITE_URL}/wiki`
     document.title = title
     upsertMeta('description', description)
-    upsertMeta('robots', 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1')
+    upsertMeta('robots', category && !activeCategoryName ? 'noindex,follow' : 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1')
     upsertProperty('og:type', 'website')
     upsertProperty('og:title', title)
     upsertProperty('og:description', description)
@@ -51,6 +50,19 @@ export default function Wiki() {
     return () => document.getElementById('wiki-jsonld')?.remove()
   }, [activeCategoryName, visible])
 
+  if (category && !activeCategoryName) {
+    return (
+      <div className="hand-page grid min-h-[60vh] place-items-center px-5 py-20">
+        <div className="max-w-xl text-center">
+          <span className="sticky-tag">404 — category not found</span>
+          <h1 className="hand-h2 mt-6">This shelf is not published.</h1>
+          <p className="hand-lead mt-4">The topic may have been renamed or its articles are being revised.</p>
+          <Link to="/wiki" className="btn mt-8">Browse published articles</Link>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="hand-page">
       <header className="page-hero">
@@ -63,8 +75,7 @@ export default function Wiki() {
           </nav>
           <h1 className="hand-h1">{activeCategoryName || 'The knowledge base'}</h1>
           <p className="hand-lead max-w-[62ch]">
-            Engineering notes, product thinking, business technology and practical reasons to choose OMIX
-            as a technical partner.
+            Technical explanations, product decisions, architecture trade-offs and practical system design.
           </p>
         </div>
       </header>
@@ -98,18 +109,10 @@ export default function Wiki() {
         <main>
           {!activeCategoryName && (
             <section className="wiki-feature-card mb-10">
-              <CornerMarks />
-              <span className="chip chip-accent">
-                <Building2 size={15} aria-hidden="true" /> Why OMIX
-              </span>
-              <h2 className="hand-h2 mt-5">Choosing a software partner is an architecture decision.</h2>
-              <p className="hand-lead mt-4 max-w-[58ch]">
-                Compare our delivery philosophy, integration-first approach and post-launch mindset before
-                you choose a provider.
-              </p>
-              <Link to="/category/why-omix" className="btn btn-secondary mt-7">
-                Explore Why OMIX <ArrowRight size={17} aria-hidden="true" />
-              </Link>
+              <span className="chip chip-accent"><BookOpen size={15} aria-hidden="true" /> Start here</span>
+              <h2 className="hand-h2 mt-5">Design the boundaries before you split the system.</h2>
+              <p className="hand-lead mt-4 max-w-[58ch]">A practical guide to module responsibilities, public contracts, data ownership and the trade-offs between a modular monolith and separate services.</p>
+              <Link to="/wiki/modular-software-systems" className="btn btn-secondary mt-7">Read the engineering guide <ArrowRight size={17} aria-hidden="true" /></Link>
             </section>
           )}
 
@@ -152,28 +155,6 @@ export default function Wiki() {
             )}
           </div>
 
-          {!activeCategoryName && whyArticles.length > 0 && (
-            <section className="mt-14">
-              <hr className="rule-dashed" />
-              <div className="section-head mt-10">
-                <div>
-                  <p className="kicker">Start here</p>
-                  <h2 className="hand-h3">Why companies choose OMIX</h2>
-                </div>
-              </div>
-              <div className="hand-grid hand-grid-2">
-                {whyArticles.map((a, i) => (
-                  <Link key={a.slug} to={`/wiki/${a.slug}`} className={`card card-pad card-interactive ${i % 2 ? 'tilt-1' : 'tilt-n1'}`}>
-                    <span className="kicker">{a.category}</span>
-                    <h3 className="hand-h3 mt-3">{a.title}</h3>
-                    <span className="text-link mt-4">
-                      Read <ArrowRight size={15} aria-hidden="true" />
-                    </span>
-                  </Link>
-                ))}
-              </div>
-            </section>
-          )}
         </main>
       </div>
     </div>
