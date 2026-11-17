@@ -5,14 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/prerender.mjs && node scripts/generate-og.mjs && node scripts/verify-pwa.mjs",
+    "build": "vite build && node scripts/prerender.mjs && node scripts/generate-og.mjs && node scripts/verify-editorial.mjs && node scripts/verify-pwa.mjs",
     "build:client": "vite build",
     "prerender": "node scripts/prerender.mjs",
     "lint": "oxlint",
     "preview": "vite preview",
     "icons": "node scripts/generate-icons.mjs",
     "verify:pwa": "node scripts/verify-pwa.mjs",
-    "og": "node scripts/generate-og.mjs"
+    "og": "node scripts/generate-og.mjs",
+    "verify:editorial": "node scripts/verify-editorial.mjs"
   },
   "dependencies": {
     "@fontsource/kalam": "^5.3.0",
