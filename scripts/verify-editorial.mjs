@@ -11,7 +11,7 @@ for (const article of published) {
   ]).join(' ')
   const words = [article.title, article.excerpt, body]
     .join(' ')
-    .match(/[\\p{L}\\p{N}][\\p{L}\\p{N}'’\\-]*/gu) || []
+    .match(/[A-Za-z0-9][A-Za-z0-9'’\\-]*/g) || []
 
   if (words.length < minimumWords) issues.push(`${article.slug}: ${words.length} words (minimum ${minimumWords})`)
   if (!article.author) issues.push(`${article.slug}: missing author attribution`)
