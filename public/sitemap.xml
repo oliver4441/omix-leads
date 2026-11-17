@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://blog.omixsystems.store/</loc></url>
-  <url><loc>https://blog.omixsystems.store/wiki</loc></url>
-  <url><loc>https://blog.omixsystems.store/category/engineering</loc></url>
-  <url><loc>https://blog.omixsystems.store/category/products</loc></url>
-  <url><loc>https://blog.omixsystems.store/category/business-technology</loc></url>
-  <url><loc>https://blog.omixsystems.store/category/why-omix</loc></url>
-  <url><loc>https://blog.omixsystems.store/wiki/modular-software-systems</loc></url>
-  <url><loc>https://blog.omixsystems.store/wiki/building-veyra</loc></url>
-  <url><loc>https://blog.omixsystems.store/wiki/school-management-platforms</loc></url>
-  <url><loc>https://blog.omixsystems.store/wiki/why-choose-omix</loc></url>
-  <url><loc>https://blog.omixsystems.store/wiki/omix-vs-generic-agency</loc></url>
-  <url><loc>https://blog.omixsystems.store/wiki/built-to-integrate</loc></url>
-  <url><loc>https://blog.omixsystems.store/wiki/transparent-software-delivery</loc></url>
-  <url><loc>https://blog.omixsystems.store/wiki/introducing-bifrost</loc></url>
-  <url><loc>https://blog.omixsystems.store/quote</loc></url>
-  <url><loc>https://blog.omixsystems.store/audit</loc></url>
-  <url><loc>https://blog.omixsystems.store/deal-alerts</loc></url>
-  <url><loc>https://blog.omixsystems.store/referral</loc></url>
-  <url><loc>https://blog.omixsystems.store/sell</loc></url>
+  <url><loc>https://blog.omixsystems.store/</loc><lastmod>2026-11-17</lastmod></url>
+  <url><loc>https://blog.omixsystems.store/wiki</loc><lastmod>2026-11-17</lastmod></url>
+  <url><loc>https://blog.omixsystems.store/category/engineering</loc><lastmod>2026-11-17</lastmod></url>
+  <url><loc>https://blog.omixsystems.store/category/ai-and-automation</loc><lastmod>2026-11-17</lastmod></url>
+  <url><loc>https://blog.omixsystems.store/category/business-technology</loc><lastmod>2026-11-17</lastmod></url>
+  <url><loc>https://blog.omixsystems.store/category/payments-and-integrations</loc><lastmod>2026-11-17</lastmod></url>
+  <url><loc>https://blog.omixsystems.store/wiki/modular-software-systems</loc><lastmod>2026-11-17</lastmod></url>
+  <url><loc>https://blog.omixsystems.store/wiki/introducing-bifrost</loc><lastmod>2026-11-17</lastmod></url>
+  <url><loc>https://blog.omixsystems.store/wiki/reliable-webhook-consumers</loc><lastmod>2026-11-17</lastmod></url>
+  <url><loc>https://blog.omixsystems.store/wiki/mpesa-stk-push-payment-lifecycle</loc><lastmod>2026-11-17</lastmod></url>
+  <url><loc>https://blog.omixsystems.store/wiki/offline-first-business-software</loc><lastmod>2026-11-17</lastmod></url>
+  <url><loc>https://blog.omixsystems.store/about</loc></url>
+  <url><loc>https://blog.omixsystems.store/editorial-policy</loc></url>
+  <url><loc>https://blog.omixsystems.store/privacy</loc></url>
+  <url><loc>https://blog.omixsystems.store/terms</loc></url>
 </urlset>
