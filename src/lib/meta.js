@@ -22,6 +22,13 @@ const noindex = (title, description, url) => ({
    stored relative and turned absolute by the head writers, so og:image is
    always a crawler-resolvable URL. */
 const OG_DEFAULT = '/og/og-default.png'
+
+const PUBLICATION_PAGES = {
+  '/about': { title: 'About the OMIX Journal', description: 'Who publishes the OMIX Journal, what it covers, and how it relates to OMIX Digital Solutions.' },
+  '/editorial-policy': { title: 'Editorial Policy — OMIX Journal', description: 'The OMIX Journal standards for authorship, research, technical verification, AI assistance, corrections and commercial transparency.' },
+  '/privacy': { title: 'Privacy Policy — OMIX Journal', description: 'How the OMIX Journal handles information, browser storage, technical logs and third-party services.' },
+  '/terms': { title: 'Terms of Use — OMIX Journal', description: 'Terms governing the use of OMIX Journal articles, references and educational material.' },
+}
 const ogImage = (path, alt) => ({ image: path || OG_DEFAULT, imageAlt: alt })
 
 /* Public lead-generation pages. Kept here (rather than in each component) so the
@@ -66,7 +73,7 @@ function toolMeta(path) {
     title: page.title,
     description: page.description,
     url,
-    robots: 'index,follow,max-image-preview:large,max-snippet:-1',
+    robots: 'noindex,follow',
     ogType: 'website',
     ...ogImage(OG_DEFAULT, page.description),
     jsonLd: [
@@ -95,8 +102,9 @@ export function getMeta(pathname) {
   if (path.startsWith('/category/')) {
     const slug = decodeURIComponent(path.slice('/category/'.length))
     const name = categories.find(c => categorySlug(c) === slug)
-    return wikiMeta(name || null, path)
+    return name ? wikiMeta(name, path) : noindex('Category not found — OMIX Journal', 'This category is not currently published.', `${SITE_URL}${path}`)
   }
+  if (PUBLICATION_PAGES[path]) return publicationMeta(path)
   if (path.startsWith('/wiki/') || path.startsWith('/articles/')) {
     const slug = decodeURIComponent(path.split('/').filter(Boolean).pop())
     return articleMeta(slug) || notFoundMeta()
@@ -155,12 +163,12 @@ function wikiMeta(categoryName, explicitPath) {
     : categoryName
       ? `${SITE_URL}/category/${categorySlug(categoryName)}`
       : `${SITE_URL}/wiki`
-  const visible = categoryName ? articles.filter(a => a.category === categoryName) : articles
+  const visible = categoryName ? articles.filter(a => a.category === categoryName && a.indexable !== false) : articles.filter(a => a.indexable !== false)
   return {
     title,
     description,
     url,
-    robots: 'index,follow,max-image-preview:large,max-snippet:-1',
+    robots: categoryName && visible.length === 0 ? 'noindex,follow' : 'index,follow,max-image-preview:large,max-snippet:-1',
     ogType: 'website',
     ...(categoryName
       ? ogImage(`/og/category-${categorySlug(categoryName)}.png`, `${categoryName} — ${visible.length} notes in the OMIX Journal`)
@@ -196,7 +204,7 @@ function articleMeta(slug) {
     title: `${article.title} — ${SITE_NAME}`,
     description: article.excerpt,
     url,
-    robots: 'index,follow,max-image-preview:large,max-snippet:-1',
+    robots: article.indexable === false ? 'noindex,follow' : 'index,follow,max-image-preview:large,max-snippet:-1',
     ogType: 'article',
     ...ogImage(`/og/wiki-${article.slug}.png`, `${article.title} — ${article.category} note from the OMIX Journal`),
     publishedTime: article.date,
@@ -208,9 +216,9 @@ function articleMeta(slug) {
         headline: article.title,
         description: article.excerpt,
         datePublished: article.date,
-        dateModified: article.date,
+        dateModified: article.updatedAt || article.date,
         inLanguage: 'en',
-        author: ORGANISATION,
+        author: { '@type': 'Organization', name: article.author || 'OMIX Engineering Desk', url: `${BRAND_URL}/` },
         publisher: ORGANISATION,
         mainEntityOfPage: { '@type': 'WebPage', '@id': url },
         articleSection: article.category,
@@ -230,8 +238,22 @@ function articleMeta(slug) {
 }
 
 /** Every path the prerenderer should emit as a static file. */
+function publicationMeta(path) {
+  const page = PUBLICATION_PAGES[path]
+  const url = `${SITE_URL}${path}`
+  return {
+    title: `${page.title} — ${SITE_NAME}`,
+    description: page.description,
+    url,
+    robots: 'index,follow,max-image-preview:large,max-snippet:-1',
+    ogType: 'website',
+    ...ogImage(OG_DEFAULT, page.description),
+    jsonLd: [{ '@context': 'https://schema.org', '@type': 'WebPage', name: page.title, description: page.description, url, isPartOf: { '@type': 'WebSite', name: SITE_NAME, url: SITE_URL }, publisher: ORGANISATION }],
+  }
+}
+
 export function getPrerenderPaths() {
-  const paths = ['/', '/wiki', ...Object.keys(TOOL_PAGES)]
+  const paths = ['/', '/wiki', ...Object.keys(TOOL_PAGES), ...Object.keys(PUBLICATION_PAGES)]
   for (const c of categories) paths.push(`/category/${categorySlug(c)}`)
   for (const a of articles) paths.push(`/wiki/${a.slug}`)
   return paths
