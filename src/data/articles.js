@@ -332,8 +332,7 @@ export const articles = [
       ['MDN — Background Synchronization API', 'https://developer.mozilla.org/en-US/docs/Web/API/Background_Synchronization_API'],
       ['Google web.dev — Offline data', 'https://web.dev/learn/pwa/offline-data/']
     ]
-  }
-  ,
+  },
   {
     slug: 'sms-commerce-feature-phone-architecture',
     title: 'Designing SMS Commerce for Feature Phones: Sessions, State Machines, and Payment Events',
