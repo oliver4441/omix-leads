@@ -1,33 +1,23 @@
 # OMIX Journal
 
-> The OMIX Journal is the public knowledge base for OMIX Digital Solutions, covering software engineering, architecture, products, business technology and the company's approach to building integrated digital systems.
+> The OMIX Journal is a technical publication by OMIX Digital Solutions. It publishes practical explanations of software engineering, architecture, AI infrastructure, payments, integrations and business technology. Company ownership and product relationships are disclosed.
 
-## Knowledge Base
-- [Knowledge Base](https://blog.omixsystems.store/wiki): Browse the OMIX Journal knowledge base.
-- [Engineering](https://blog.omixsystems.store/category/engineering): Engineering notes on modular software and system design.
-- [Products](https://blog.omixsystems.store/category/products): Product notes covering OMIX products and platforms.
-- [Business Technology](https://blog.omixsystems.store/category/business-technology): Practical technology and workflow guidance for businesses.
-- [Why OMIX](https://blog.omixsystems.store/category/why-omix): Articles explaining OMIX's delivery and engineering approach.
+## Publication information
+- [About the OMIX Journal](https://blog.omixsystems.store/about)
+- [Editorial Policy](https://blog.omixsystems.store/editorial-policy)
+- [Privacy Policy](https://blog.omixsystems.store/privacy)
+- [Terms of Use](https://blog.omixsystems.store/terms)
+- [Knowledge Base](https://blog.omixsystems.store/wiki)
+- [RSS Feed](https://blog.omixsystems.store/feed.xml)
+- [Sitemap](https://blog.omixsystems.store/sitemap.xml)
 
-## Featured Articles
-- [What We Mean by Modular Software Systems](https://blog.omixsystems.store/wiki/modular-software-systems): OMIX's approach to modular software and integration-first architecture.
-- [Building Veyra as a Product Platform](https://blog.omixsystems.store/wiki/building-veyra): Product architecture notes for Veyra.
-- [Why School Management Platforms Need Better Workflows](https://blog.omixsystems.store/wiki/school-management-platforms): Workflow and platform thinking for school management software.
-- [Introducing Bifrost: One Gateway for AI Model Routing](https://blog.omixsystems.store/wiki/introducing-bifrost): An introduction to Bifrost and AI model routing infrastructure.
-- [Why Choose OMIX for Your Digital Product?](https://blog.omixsystems.store/wiki/why-choose-omix): OMIX's product engineering and integration approach.
+## Published technical guides
+- [Designing Modular Software Systems](https://blog.omixsystems.store/wiki/modular-software-systems): module boundaries, public contracts, data ownership, failure handling and contract tests.
+- [AI Model Routing](https://blog.omixsystems.store/wiki/introducing-bifrost): provider adapters, routing policies, timeouts, fallback behavior, security and observability.
+- [Reliable Webhook Consumers](https://blog.omixsystems.store/wiki/reliable-webhook-consumers): signature verification, idempotency, durable processing, retries, event ordering and reconciliation.
+- [M-PESA STK Push Payment Lifecycle](https://blog.omixsystems.store/wiki/mpesa-stk-push-payment-lifecycle): asynchronous payment states, callback handling, ledger posting and reconciliation for Kenyan payment workflows.
+- [Offline-First Business Software](https://blog.omixsystems.store/wiki/offline-first-business-software): local persistence, outbox synchronization, conflict resolution and device security.
 
-## Work With OMIX
-- [Website Quote Calculator](https://blog.omixsystems.store/quote): Instant estimate builder for a website or business system.
-- [Free Business Audit](https://blog.omixsystems.store/audit): Score a business's online presence and get practical next steps.
-- [Deal Alerts](https://blog.omixsystems.store/deal-alerts): Subscribe to OMIX Store price-drop alerts by category and county.
-- [Sell on the OMIX Store](https://blog.omixsystems.store/sell): Vendor application for the OMIX marketplace.
-- [Refer and Earn](https://blog.omixsystems.store/referral): Referral programme details and code generation.
-
-## Company
-- [OMIX Systems](https://omixsystems.store): Main OMIX Digital Solutions website.
-- [Decimal](https://decimal.omixsystems.store): OMIX school management product.
-- [Bifrost](https://bifrost.omixsystems.store): OMIX AI model routing product.
-
-## Optional
-- [Sitemap](https://blog.omixsystems.store/sitemap.xml): Exhaustive index of public Journal URLs.
-- [RSS Feed](https://blog.omixsystems.store/feed.xml): Machine-readable feed of Journal articles.
+## Publisher
+- [OMIX Digital Solutions](https://omixsystems.store): the company that publishes the Journal.
+- Contact: omixsystems@gmail.com
